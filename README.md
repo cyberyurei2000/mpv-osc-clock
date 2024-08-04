@@ -46,8 +46,8 @@ local config = {
 - `bordersize`: Set the border size, set to 0 to disable the border;
 - `bordercolor`: Set the border color (format: BBGGRR);
 - `shadowdist`: Set the distace of the shadow, set to 0 to disable the shadow;
-- `shadowcolor`: Set the shadow color;
-- `blur`: Set the strength of the blur to apply in the edges of the text;
+- `shadowcolor`: Set the shadow color (format: BBGGRR);
+- `blur`: Set the strength of the blur to apply in the edges of the text, set to 0 to disable it;
 - `positionx`: Set the X position of the clock on screen;
 - `positiony`: Set the Y position of the clock on screen;
 - `format`: Set the time format;
