@@ -10,7 +10,7 @@ Toggle it by a keyboard shortcut; by default, it uses `C`.
 
 ## Setup
 
-Simply place the `osc.clock.lua` inside the mpv's script directory.
+Simply place the file `/scripts/osc.clock.lua` inside the mpv's script directory.
 
 - **Windows**: `%APPDATA%/mpv/scripts`
 - **Linux**: `~/.config/mpv/scripts`
