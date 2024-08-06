@@ -39,7 +39,7 @@ blur=0
 
 ![Screenshot1](/docs/screenshot2.png)
 
-### Configuration Options
+### Configuration options
 
 |     Options     |           Description            |
 |-----------------|----------------------------------|
