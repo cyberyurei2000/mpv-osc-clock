@@ -16,7 +16,8 @@ local user_opts = {
     positionx   = 70,                     -- Set the X position of the clock on screen
     positiony   = 50,                     -- Set the Y position of the clock on screen
     format      = "%H:%M",                -- Set the time format (format: %H = hour, %M = minutes, %S = seconds)
-    key         = "C"                     -- Set the key to toggle the clock
+    key         = "C",                    -- Set the key to toggle the clock
+    onbydefault = false                   -- Set if the clock is gonna be enabled by default
 }
 
 (require 'mp.options').read_options(user_opts, "osc-clock")
@@ -62,6 +63,10 @@ local function clock_toggle()
         timer = mp.add_periodic_timer(1, clock)
         is_shown = true
     end
+end
+
+if user_opts.onbydefault then
+    clock_toggle()
 end
 
 mp.add_key_binding(user_opts.key, "show-clock", clock_toggle)

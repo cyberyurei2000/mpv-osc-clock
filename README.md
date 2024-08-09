@@ -41,20 +41,21 @@ blur=0
 
 ### Configuration options
 
-|     Options     |           Description            |
-|-----------------|----------------------------------|
-|  `font`         |  Set the font name.
-|  `fontsize`     |  Set the font size.
-|  `fontcolor`    |  Set the font color (format: BBGGRR).
-|  `bordersize`   |  Set the border size, set to 0 to disable the border.
-|  `bordercolor`  |  Set the border color (format: BBGGRR).
-|  `shadowdist`   |  Set the distace of the shadow, set to 0 to disable the shadow.
-|  `shadowcolor`  |  Set the shadow color (format: BBGGRR).
-|  `blur`         |  Set the strength of the blur to apply in the edges of the text, set to 0 to disable it.
-|  `positionx`    |  Set the X position of the clock on screen.
-|  `positiony`    |  Set the Y position of the clock on screen.
-|  `format`       |  Set the time format (format: %H = hour, %M = minutes, %S = seconds).
-|  `key`          |  Set the keybinding to toggle the clock.
+|     Options     |                                      Description                                          |        Default        |
+|-----------------|-------------------------------------------------------------------------------------------|-----------------------|
+|  `font`         |  Set the font name.                                                                       | `FO-ANN-GMorning2020` |
+|  `fontsize`     |  Set the font size.                                                                       |         `60`          |
+|  `fontcolor`    |  Set the font color (format: BBGGRR).                                                     |        `FFFFFF`       |
+|  `bordersize`   |  Set the border size, set to 0 to disable the border.                                     |         `3`           |
+|  `bordercolor`  |  Set the border color (format: BBGGRR).                                                   |        `000000`       |
+|  `shadowdist`   |  Set the distace of the shadow, set to 0 to disable the shadow.                           |         `0`           |
+|  `shadowcolor`  |  Set the shadow color (format: BBGGRR).                                                   |        `000000`       |
+|  `blur`         |  Set the strength of the blur to apply in the edges of the text, set to 0 to disable it.  |         `2`           |
+|  `positionx`    |  Set the X position of the clock on screen.                                               |         `70`          |
+|  `positiony`    |  Set the Y position of the clock on screen.                                               |         `50`          |
+|  `format`       |  Set the time format (format: %H = hour, %M = minutes, %S = seconds).                     |        `%H:%M`        |
+|  `key`          |  Set the keybinding to toggle the clock.                                                  |         `C`           |
+|  `onbydefault`  |  Set if the clock is gonna be enabled by default.                                         |         `no`          |
 
 ## Credits
 
