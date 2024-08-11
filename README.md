@@ -27,7 +27,7 @@ You can customize any aspect of the clock. To do this, create a `osc-clock.conf`
 Here is an example of a configuration file, which would be placed in `script-opts/osc-clock.conf`:
 
 ```ini
-font=VAG Rounded Std
+font=Globoface 2002
 fontsize=95
 fontcolor=FFFFFF
 bordersize=3
@@ -35,6 +35,7 @@ bordercolor=000000
 shadowdist=5
 shadowcolor=000000
 blur=0
+positiony=30
 ```
 
 ![Screenshot1](/docs/screenshot2.png)
