@@ -53,8 +53,8 @@ local data = string.format(
 )
 
 local function clock()
-    local systime
-    local time
+    local systime = nil
+    local time = nil
 
     if user_opts.jtvformat then
         systime = os.date("%I:%M")
@@ -66,8 +66,7 @@ local function clock()
             time = systime
         end
     else
-        systime = os.date(user_opts.format)
-        systime = time
+        time = os.date(user_opts.format)
     end
 
     osc_clock.data = string.format("{\\an7}%s%s", data, time)
