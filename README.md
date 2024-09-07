@@ -49,7 +49,7 @@ shadowdist=0
 blur=1
 positionx=32
 positiony=28
-formatjtv=yes
+jtvformat=yes
 ```
 
 ![Screenshot1](/docs/screenshot3.png)
