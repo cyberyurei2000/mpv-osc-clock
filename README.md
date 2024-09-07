@@ -24,7 +24,7 @@ You can customize any aspect of the clock. To do this, create a `osc-clock.conf`
 
 ### Example
 
-Here is an example of a configuration file, which would be placed in `script-opts/osc-clock.conf`:
+Here some examples of configuration files, which would be placed in `script-opts/osc-clock.conf`:
 
 ```ini
 font=Globoface 2002
@@ -34,11 +34,25 @@ bordersize=3
 bordercolor=000000
 shadowdist=5
 shadowcolor=000000
-blur=0
 positiony=30
 ```
 
 ![Screenshot1](/docs/screenshot2.png)
+
+```ini
+font=FO-TVASAHI-GMorning
+fontsize=51
+fontcolor=FFFFFF
+bordersize=4
+bordercolor=000000
+shadowdist=0
+blur=1
+positionx=32
+positiony=28
+formatjtv=yes
+```
+
+![Screenshot1](/docs/screenshot3.png)
 
 ### Configuration options
 
@@ -46,6 +60,7 @@ positiony=30
 |-----------------|-------------------------------------------------------------------------------------------|-----------------------|
 |  `font`         |  Set the font name.                                                                       | `FO-ANN-GMorning2020` |
 |  `fontsize`     |  Set the font size.                                                                       |         `60`          |
+|  `fontbold`     |  Set if the font should be bold or not                                                    |         `no`          |
 |  `fontcolor`    |  Set the font color (format: BBGGRR).                                                     |        `FFFFFF`       |
 |  `bordersize`   |  Set the border size, set to 0 to disable the border.                                     |         `3`           |
 |  `bordercolor`  |  Set the border color (format: BBGGRR).                                                   |        `000000`       |
@@ -54,7 +69,8 @@ positiony=30
 |  `blur`         |  Set the strength of the blur to apply in the edges of the text, set to 0 to disable it.  |         `2`           |
 |  `positionx`    |  Set the X position of the clock on screen.                                               |         `70`          |
 |  `positiony`    |  Set the Y position of the clock on screen.                                               |         `50`          |
-|  `format`       |  Set the time format (format: %H = hour, %M = minutes, %S = seconds).                     |        `%H:%M`        |
+|  `format`       |  Set the time format (learn more at https://www.lua.org/pil/22.1.html) (will be ignored if jtvformat is enabled).                   |        `%H:%M`        |
+|  `jtvformat`    |  Set if the clock should be in a simplified 12h format.                                   |         `no`          |
 |  `key`          |  Set the keybinding to toggle the clock.                                                  |         `C`           |
 |  `onbydefault`  |  Set if the clock is gonna be enabled by default.                                         |         `no`          |
 
