@@ -69,7 +69,7 @@ formatjtv=yes
 |  `blur`         |  Set the strength of the blur to apply in the edges of the text, set to 0 to disable it.  |         `2`           |
 |  `positionx`    |  Set the X position of the clock on screen.                                               |         `70`          |
 |  `positiony`    |  Set the Y position of the clock on screen.                                               |         `50`          |
-|  `format`       |  Set the time format (learn more at https://www.lua.org/pil/22.1.html) (will be ignored if jtvformat is enabled).                   |        `%H:%M`        |
+|  `format`       |  Set the time format (learn more at https://www.lua.org/pil/22.1.html) (will be ignored if `jtvformat` is enabled).                   |        `%H:%M`        |
 |  `jtvformat`    |  Set if the clock should be in a simplified 12h format.                                   |         `no`          |
 |  `key`          |  Set the keybinding to toggle the clock.                                                  |         `C`           |
 |  `onbydefault`  |  Set if the clock is gonna be enabled by default.                                         |         `no`          |
