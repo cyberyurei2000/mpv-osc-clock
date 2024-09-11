@@ -6,13 +6,14 @@
 -- change them using osc-clock.conf in the script-opts directory
 local user_opts = {
     font        = "FO-ANN-GMorning2020",  -- Set the font name
-    fontsize    = 60,                     -- Set the font size
+    fontsize    = 50,                     -- Set the font size
     fontbold    = false,                  -- Set if the font should be bold or not
     fontcolor   = "FFFFFF",               -- Set the font color (format: BBGGRR)
     bordersize  = 3,                      -- Set the border size, set to 0 to disable the border
     bordercolor = "000000",               -- Set the border color (format: BBGGRR)
     shadowdist  = 0,                      -- Set the distace of the shadow, set to 0 to disable the shadow
     shadowcolor = "000000",               -- Set the shadow color (format: BBGGRR)
+    shadowalpha = 0,                      -- Set the shadow transparency
     blur        = 2,                      -- Set the strength of the blur to apply in the edges of the text, set to 0 to disable it
     positionx   = 70,                     -- Set the X position of the clock on screen
     positiony   = 50,                     -- Set the Y position of the clock on
@@ -34,6 +35,7 @@ local bordersize = string.format("{\\bord%d}", user_opts.bordersize)
 local bordercolor = string.format("{\\3c%s}", user_opts.bordercolor)
 local shadowdist = string.format("{\\shad%d}", user_opts.shadowdist)
 local shadowcolor = string.format("{\\4c&H%d&}", user_opts.shadowcolor)
+local shadowalpha = string.format("{\\4a&H%d}", user_opts.shadowalpha)
 local blur = string.format("{\\blur%d}", user_opts.blur)
 local position = string.format("{\\pos(%d,%d)}", user_opts.positionx, user_opts.positiony)
 
@@ -45,10 +47,10 @@ else
 end
 
 local data = string.format(
-    "%s%s%s%s%s%s%s%s%s%s",
+    "%s%s%s%s%s%s%s%s%s%s%s",
     font, fontsize, fontbold, fontcolor,
     bordersize, bordercolor,
-    shadowdist, shadowcolor,
+    shadowdist, shadowcolor, shadowalpha,
     blur, position
 )
 
