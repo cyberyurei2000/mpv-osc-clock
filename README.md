@@ -28,56 +28,46 @@ Here some examples of configuration files, which would be placed in `script-opts
 
 ```ini
 font=Globoface 2002
-fontsize=95
+fontsize=80
+fontbold=no
 fontcolor=FFFFFF
-bordersize=3
+bordersize=1
 bordercolor=000000
-shadowdist=5
+shadowdist=4
 shadowcolor=000000
+shadowalpha=60
+blur=0
+positionx=70
 positiony=30
+jtvformat=false
 ```
 
 ![Screenshot1](/docs/screenshot2.png)
-
-```ini
-font=FO-TVASAHI-GMorning
-fontsize=51
-fontcolor=FFFFFF
-bordersize=4
-bordercolor=000000
-shadowdist=0
-blur=1
-positionx=32
-positiony=28
-jtvformat=yes
-```
-
-![Screenshot1](/docs/screenshot3.png)
 
 ### Configuration options
 
 |     Options     |                                      Description                                          |        Default        |
 |-----------------|-------------------------------------------------------------------------------------------|-----------------------|
-|  `font`         |  Set the font name.                                                                       | `FO-ANN-GMorning2020` |
-|  `fontsize`     |  Set the font size.                                                                       |         `60`          |
+|  `font`         |  Set the font name.                                                                       | `FO-TVASAHI-GMorning` |
+|  `fontsize`     |  Set the font size.                                                                       |         `51`          |
 |  `fontbold`     |  Set if the font should be bold or not                                                    |         `no`          |
 |  `fontcolor`    |  Set the font color (format: BBGGRR).                                                     |        `FFFFFF`       |
-|  `bordersize`   |  Set the border size, set to 0 to disable the border.                                     |         `3`           |
+|  `bordersize`   |  Set the border size, set to 0 to disable the border.                                     |         `4`           |
 |  `bordercolor`  |  Set the border color (format: BBGGRR).                                                   |        `000000`       |
 |  `shadowdist`   |  Set the distace of the shadow, set to 0 to disable the shadow.                           |         `0`           |
 |  `shadowcolor`  |  Set the shadow color (format: BBGGRR).                                                   |        `000000`       |
-|  `shadowalpha`  |  Set the shadow transparency                                                              |        `50`           |
-|  `blur`         |  Set the strength of the blur to apply in the edges of the text, set to 0 to disable it.  |         `2`           |
-|  `positionx`    |  Set the X position of the clock on screen.                                               |         `70`          |
-|  `positiony`    |  Set the Y position of the clock on screen.                                               |         `50`          |
+|  `shadowalpha`  |  Set the shadow transparency                                                              |        `0`           |
+|  `blur`         |  Set the strength of the blur to apply in the edges of the text, set to 0 to disable it.  |         `1`           |
+|  `positionx`    |  Set the X position of the clock on screen.                                               |         `32`          |
+|  `positiony`    |  Set the Y position of the clock on screen.                                               |         `28`          |
 |  `format`       |  Set the time format (learn more at https://www.lua.org/pil/22.1.html) (will be ignored if `jtvformat` is enabled). |        `%H:%M`        |
-|  `jtvformat`    |  Set if the clock should be in a simplified 12h format.                                   |         `no`          |
+|  `jtvformat`    |  Set if the clock should be in a simplified 12h format.                                   |         `yes`          |
 |  `key`          |  Set the keybinding to toggle the clock.                                                  |         `C`           |
 |  `onbydefault`  |  Set if the clock is gonna be enabled by default.                                         |         `no`          |
 
 ## Credits
 
-The font **FO-ANN-GMorning2020** and the other fonts found in `/extra/TV-TIMER-FONT-V1.zip` was made by the user @tvoped on Twitter ([Link](https://web.archive.org/web/20220320123906/https://twitter.com/tvoped/status/1466992257962487811)).
+The font **FO-TVASAHI-GMorning** and the other fonts found in `/extra/TV-TIMER-FONT-V1.zip` was made by the user @tvoped on Twitter ([Link](https://web.archive.org/web/20220320123906/https://twitter.com/tvoped/status/1466992257962487811)).
 
 You can get the fonts in the [`extra`](/extra) directory or from the original [source](https://www.dropbox.com/scl/fi/3lir00hds4o3xqr6hdwea/TV-TIMER-FONT-V1.zip?rlkey=xgnqhdotec8a9kf25nck7azg7&e=1&dl=0).
 

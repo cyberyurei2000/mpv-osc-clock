@@ -5,20 +5,20 @@
 -- parameters: default user option values
 -- change them using osc-clock.conf in the script-opts directory
 local user_opts = {
-    font        = "FO-ANN-GMorning2020",  -- Set the font name
-    fontsize    = 50,                     -- Set the font size
+    font        = "FO-TVASAHI-GMorning",  -- Set the font name
+    fontsize    = 51,                     -- Set the font size
     fontbold    = false,                  -- Set if the font should be bold or not
     fontcolor   = "FFFFFF",               -- Set the font color (format: BBGGRR)
-    bordersize  = 3,                      -- Set the border size, set to 0 to disable the border
+    bordersize  = 4,                      -- Set the border size, set to 0 to disable the border
     bordercolor = "000000",               -- Set the border color (format: BBGGRR)
     shadowdist  = 0,                      -- Set the distace of the shadow, set to 0 to disable the shadow
     shadowcolor = "000000",               -- Set the shadow color (format: BBGGRR)
     shadowalpha = 0,                      -- Set the shadow transparency
-    blur        = 2,                      -- Set the strength of the blur to apply in the edges of the text, set to 0 to disable it
-    positionx   = 70,                     -- Set the X position of the clock on screen
-    positiony   = 50,                     -- Set the Y position of the clock on
+    blur        = 1,                      -- Set the strength of the blur to apply in the edges of the text, set to 0 to disable it
+    positionx   = 32,                     -- Set the X position of the clock on screen
+    positiony   = 28,                     -- Set the Y position of the clock on
     format      = "%H:%M",                -- Set the time format (learn more at https://www.lua.org/pil/22.1.html) (will be ignored if jtvformat is enabled)
-    jtvformat   = false,                  -- Set if the clock should be in a simplified 12h format
+    jtvformat   = true,                  -- Set if the clock should be in a simplified 12h format
     key         = "C",                    -- Set the key to toggle the clock
     onbydefault = false                   -- Set if the clock is gonna be enabled by default
 }
