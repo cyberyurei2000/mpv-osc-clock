@@ -56,12 +56,13 @@ jtvformat=no
 |  `bordercolor`  |  Set the border color (format: BBGGRR).                                                   |        `000000`       |
 |  `shadowdist`   |  Set the distace of the shadow, set to 0 to disable the shadow.                           |         `0`           |
 |  `shadowcolor`  |  Set the shadow color (format: BBGGRR).                                                   |        `000000`       |
-|  `shadowalpha`  |  Set the shadow transparency                                                              |        `0`           |
+|  `shadowalpha`  |  Set the shadow transparency                                                              |         `0`           |
+|  `clockalpha`   |  Set the clock transparency                                                               |         `0`           |
 |  `blur`         |  Set the strength of the blur to apply in the edges of the text, set to 0 to disable it.  |         `1`           |
 |  `positionx`    |  Set the X position of the clock on screen.                                               |         `32`          |
 |  `positiony`    |  Set the Y position of the clock on screen.                                               |         `28`          |
 |  `format`       |  Set the time format (learn more at https://www.lua.org/pil/22.1.html) (will be ignored if `jtvformat` is enabled). |        `%H:%M`        |
-|  `jtvformat`    |  Set if the clock should be in a simplified 12h format.                                   |         `yes`          |
+|  `jtvformat`    |  Set if the clock should be in a simplified 12h format.                                   |         `yes`         |
 |  `key`          |  Set the keybinding to toggle the clock.                                                  |         `C`           |
 |  `onbydefault`  |  Set if the clock is gonna be enabled by default.                                         |         `no`          |
 

@@ -14,11 +14,12 @@ local user_opts = {
     shadowdist  = 0,                      -- Set the distace of the shadow, set to 0 to disable the shadow
     shadowcolor = "000000",               -- Set the shadow color (format: BBGGRR)
     shadowalpha = 0,                      -- Set the shadow transparency
+    clockalpha  = 0,                      -- Set the clock transparency
     blur        = 1,                      -- Set the strength of the blur to apply in the edges of the text, set to 0 to disable it
     positionx   = 32,                     -- Set the X position of the clock on screen
     positiony   = 28,                     -- Set the Y position of the clock on
     format      = "%H:%M",                -- Set the time format (learn more at https://www.lua.org/pil/22.1.html) (will be ignored if jtvformat is enabled)
-    jtvformat   = true,                  -- Set if the clock should be in a simplified 12h format
+    jtvformat   = true,                   -- Set if the clock should be in a simplified 12h format
     key         = "C",                    -- Set the key to toggle the clock
     onbydefault = false                   -- Set if the clock is gonna be enabled by default
 }
@@ -36,6 +37,7 @@ local bordercolor = string.format("{\\3c%s}", user_opts.bordercolor)
 local shadowdist = string.format("{\\shad%d}", user_opts.shadowdist)
 local shadowcolor = string.format("{\\4c&H%s&}", user_opts.shadowcolor)
 local shadowalpha = string.format("{\\4a&H%d}", user_opts.shadowalpha)
+local clockalpha = string.format("{\\alpha&H%d}", user_opts.clockalpha)
 local blur = string.format("{\\blur%d}", user_opts.blur)
 local position = string.format("{\\pos(%d,%d)}", user_opts.positionx, user_opts.positiony)
 
@@ -47,11 +49,11 @@ else
 end
 
 local data = string.format(
-    "%s%s%s%s%s%s%s%s%s%s%s",
+    "%s%s%s%s%s%s%s%s%s%s%s%s",
     font, fontsize, fontbold, fontcolor,
     bordersize, bordercolor,
     shadowdist, shadowcolor, shadowalpha,
-    blur, position
+    clockalpha, blur, position
 )
 
 local function clock()
