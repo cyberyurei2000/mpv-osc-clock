@@ -10,17 +10,28 @@ Toggle it by a keyboard shortcut; by default, it uses `C`.
 
 ## Setup
 
-Simply place the file `/scripts/osc.clock.lua` inside the mpv's script directory.
+Simply place the file `/scripts/osc-clock.lua` inside the mpv's script directory.
 
-- **Windows**: `%APPDATA%/mpv/scripts`
-- **Linux**: `~/.config/mpv/scripts`
+- **Windows**: `%APPDATA%\mpv\scripts\osc-clock.lua`
+- **Linux**: `~/.config/mpv/scripts/osc-clock.lua`
+
+### Folder Structure
+```
+mpv/
+├── fonts/
+│   └── FO-TVASAHI-GMorning.otf
+├── script-opts/
+│   └── osc-clock.conf
+└── scripts/
+	└── osc-clock.lua
+```
 
 ## Customization
 
 You can customize any aspect of the clock. To do this, create a `osc-clock.conf` file and place inside the `script-opts` directory in the mpv's configuration directory.
 
-- **Windows**: `%APPDATA%/mpv/script-opts`
-- **Linux**: `~/.config/mpv/script-opts`
+- **Windows**: `%APPDATA%\mpv\script-opts\osc-clock.conf`
+- **Linux**: `~/.config/mpv/script-opts/osc-clock.conf`
 
 ### Example
 
