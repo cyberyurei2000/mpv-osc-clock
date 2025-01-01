@@ -1,4 +1,4 @@
--- Copyright (c) cyberyurei2000 2024
+-- Copyright (c) cyberyurei2000 2024-2025
 -- Released under the BSD 3-Clause License
 -- https://opensource.org/license/bsd-3-clause
 
