@@ -96,7 +96,7 @@ dateformat=%d (%a)
 |  `clockposx`    |  Set the X position of the clock on screen.                                                 |         `32`          |
 |  `clockposy`    |  Set the Y position of the clock on screen.                                                 |         `28`          |
 |  `format`       |  Set the time format (learn more at https://www.lua.org/pil/22.1.html) (will be ignored if `formatsmp` is enabled). |        `%H:%M`        |
-|  `formatsmp`    |  Set if the clock should be in a simplified 12h format , set to 0 to disable it (available options: `1` and `2`).       |        `2`            |
+|  `formatsmp`    |  Set if the clock should be in a simplified 12h format , set to `0` to disable it (available options: `1` and `2`).       |        `2`            |
 
 |  Data Options   |                                      Description                                            |        Default        |
 |-----------------|---------------------------------------------------------------------------------------------|-----------------------|
