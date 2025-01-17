@@ -95,15 +95,15 @@ dateformat=%d (%a)
 |-----------------|---------------------------------------------------------------------------------------------|-----------------------|
 |  `clockposx`    |  Set the X position of the clock on screen.                                                 |         `32`          |
 |  `clockposy`    |  Set the Y position of the clock on screen.                                                 |         `28`          |
-|  `format`       |  Set the time format (learn more at https://www.lua.org/pil/22.1.html) (will be ignored if `formatsmp` is enabled). |        `%H:%M`        |
+|  `format`       |  Set the time format ([?](https://www.lua.org/pil/22.1.html)) (will be ignored if `formatsmp` is enabled). |        `%H:%M`        |
 |  `formatsmp`    |  Set if the clock should be in a simplified 12h format , set to `0` to disable it (available options: `1` and `2`). |        `2`            |
 
-|  Data Options   |                                      Description                                            |        Default        |
+|  Date Options   |                                      Description                                            |        Default        |
 |-----------------|---------------------------------------------------------------------------------------------|-----------------------|
 |  `date`         |  Set if the date should appear                                                              |         `no`          |
 |  `dateposx`     |  Set the X position of the date on screen                                                   |         `52`          |
 |  `dateposy`     |  Set the Y position of the date on screen                                                   |         `58`          |
-|  `dateformat`   |  Set the date format (learn more at https://www.lua.org/pil/22.1.html)                      |       `%Y/%m/%d`      |
+|  `dateformat`   |  Set the date format ([?](https://www.lua.org/pil/22.1.html))                               |       `%Y/%m/%d`      |
 
 ## Credits
 
