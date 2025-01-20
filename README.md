@@ -57,7 +57,7 @@ formatsmp=0
 
 ```ini
 font=NanumGothic
-fontsize=37
+fontsize=35
 fontbold=yes
 bordersize=0
 shadowdist=2
