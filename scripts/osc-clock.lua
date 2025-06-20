@@ -17,8 +17,10 @@ local user_opts = {
     shadowcolor = "000000",               -- Set the shadow color (format: BBGGRR)
     shadowalpha = 0,                      -- Set the shadow transparency
     blur        = 1,                      -- Set the strength of the blur to apply in the edges of the text, set to 0 to disable it
-    key         = "C",                    -- Set the key to toggle the clock
-    onbydefault = false,                  -- Set if the clock is gonna be enabled by default
+    tempkey     = "c",                    -- Set the key to toggle the clock for a brief time
+    permakey    = "C",                    -- Set the key to toggle the clock permanently
+    duration    = 5,                      -- Set how many seconds the clock should be displayed before auto-hiding
+    onbydefault = false,                  -- Set if the clock should be toggled automatically by default
     -- Clock
     clockposx   = 32,                     -- Set the X position of the clock on screen
     clockposy   = 28,                     -- Set the Y position of the clock on
@@ -35,7 +37,9 @@ local user_opts = {
 local osc_clock = mp.create_osd_overlay("ass-events")
 local osc_date = mp.create_osd_overlay("ass-events")
 local timer = nil
+local hide_timer = nil
 local is_shown = false
+local is_permanent = false
 
 local font = string.format("{\\fn%s}", user_opts.font)
 local fontsize = string.format("{\\fs%d}", user_opts.fontsize)
@@ -103,25 +107,66 @@ local function clock()
     end
 end
 
-local function clock_toggle()
-    if is_shown then
-        osc_clock:remove()
-        if osc_date then
-            osc_date:remove()
+local function hide_clock()
+    osc_clock:remove()
+    if osc_date then
+        osc_date:remove()
+    end
+
+    if timer then
+        timer:stop()
+    end
+    if hide_timer then
+        hide_timer:kill()
+        hide_timer = nil
+    end
+    is_shown = false
+end
+
+local function show_clock_temp()
+    if not is_permanent then
+        if is_shown and not is_permanent then
+            if hide_timer then
+                hide_timer:kill()
+            end
+            hide_timer = mp.add_timeout(user_opts.duration, hide_clock)
+            return
         end
 
-        timer:stop()
-        is_shown = false
-    else
         clock()
         timer = mp.add_periodic_timer(1, clock)
         is_shown = true
+        hide_timer = mp.add_timeout(user_opts.duration, hide_clock)
+    end
+end
+
+local function toggle_clock_permanent()
+    if not hide_timer then
+        if is_shown and is_permanent then
+            osc_clock:remove()
+            if osc_date then
+                osc_date:remove()
+            end
+
+            if timer then
+                timer:stop()
+            end
+            is_shown = false
+            is_permanent = false
+        else
+            clock()
+
+            timer = mp.add_periodic_timer(1, clock)
+            is_shown = true
+            is_permanent = true
+        end
     end
 end
 
 if user_opts.onbydefault then
-    clock_toggle()
+    clock_toggle_permanent()
 end
 
-mp.add_key_binding(user_opts.key, "show-clock", clock_toggle)
-mp.msg.verbose(string.format("key: \"%s\" bound to \"show-clock\"", user_opts.key))
+mp.add_key_binding(user_opts.tempkey, "show-clock-temporary", show_clock_temp)
+mp.add_key_binding(user_opts.permakey, "toggle-clock-permanent", toggle_clock_permanent)
+mp.msg.verbose("Key bindings: \"%s\" for temporary clock, \"%s\" for permanent toggle", user_opts.tempkey, user_opts.permakey)
