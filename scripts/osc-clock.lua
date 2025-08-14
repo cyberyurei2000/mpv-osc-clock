@@ -43,39 +43,37 @@ local hide_timer = nil
 local is_shown = false
 local is_permanent = false
 
-local font = string.format("{\\fn%s}", user_opts.font)
-local fontsize = string.format("{\\fs%d}", user_opts.fontsize)
-local fontcolor = string.format("{\\1c&H%s&}", string.reverse(user_opts.fontcolor))
-local fontalpha = string.format("{\\alpha&H%d}", user_opts.fontalpha)
-local bordersize = string.format("{\\bord%d}", user_opts.bordersize)
-local bordercolor = string.format("{\\3c&H%s&}", string.reverse(user_opts.bordercolor))
-local borderalpha = string.format("{\\3a&H%d}", user_opts.borderalpha)
-local shadowdist = string.format("{\\shad%d}", user_opts.shadowdist)
-local shadowcolor = string.format("{\\4c&H%s&}", string.reverse(user_opts.shadowcolor))
-local shadowalpha = string.format("{\\4a&H%d}", user_opts.shadowalpha)
-local textspacing = string.format("{\\fsp%d}", user_opts.textspacing)
-local edgeblur = string.format("{\\blur%d}", user_opts.edgeblur)
-local clockpos = string.format("{\\pos(%d,%d)}", user_opts.clockposx, user_opts.clockposy)
-local datepos = string.format("{\\pos(%d, %d)}", user_opts.dateposx, user_opts.dateposy)
-
-local fontbold;
-if user_opts.fontbold then
-    fontbold = "{\\b1}"
-else
-    fontbold = "{\\b0}"
+local function format_color(color, prefix)
+    return string.format("{\\%sc&H%s&}", prefix, string.reverse(color))
 end
 
-local data = string.format(
-    "%s%s%s%s%s%s%s%s%s%s%s%s%s",
-    font, fontsize, fontbold, fontcolor, fontalpha,
-    bordersize, bordercolor, borderalpha,
-    shadowdist, shadowcolor, shadowalpha,
-    textspacing, edgeblur
-)
+local function set_clock_style()
+    local bold = user_opts.fontbold and 1 or 0
+
+    return string.format(
+        "%s%s%s%s%s%s%s%s%s%s%s%s%s",
+        string.format("{\\fn%s}", user_opts.font),
+        string.format("{\\fs%d}", user_opts.fontsize),
+        string.format("{\\b%d}", bold),
+        format_color(user_opts.fontcolor, "1"),
+        string.format("{\\alpha&H%d}", user_opts.fontalpha),
+        string.format("{\\bord%d}", user_opts.bordersize),
+        format_color(user_opts.bordercolor, "3"),
+        string.format("{\\3a&H%d}", user_opts.borderalpha),
+        string.format("{\\shad%d}", user_opts.shadowdist),
+        format_color(user_opts.shadowcolor, "4"),
+        string.format("{\\4a&H%d}", user_opts.shadowalpha),
+        string.format("{\\fsp%d}", user_opts.textspacing),
+        string.format("{\\blur%d}", user_opts.edgeblur)
+    )
+end
+local clockpos = string.format("{\\pos(%d,%d)}", user_opts.clockposx, user_opts.clockposy)
+local datepos = string.format("{\\pos(%d, %d)}", user_opts.dateposx, user_opts.dateposy)
 
 local function clock()
     local systime = nil
     local time = nil
+    local data = set_clock_style()
     local date = os.date(user_opts.dateformat)
 
     if user_opts.formatsmp > 0 then
@@ -104,10 +102,6 @@ local function clock()
     if user_opts.date then
         osc_date.data = string.format("{\\an7}%s%s%s", data, datepos, date)
         osc_date:update()
-    end
-
-    for i=1, 4 do
-        collectgarbage()
     end
 end
 
@@ -171,6 +165,6 @@ if user_opts.onbydefault then
     clock_toggle_permanent()
 end
 
-mp.add_key_binding(user_opts.tempkey, "show-clock-temporary", show_clock_temp)
-mp.add_key_binding(user_opts.permakey, "toggle-clock-permanent", toggle_clock_permanent)
+mp.add_key_binding(user_opts.tempkey, "show_clock_temp", show_clock_temp)
+mp.add_key_binding(user_opts.permakey, "toggle_clock_permanent", toggle_clock_permanent)
 mp.msg.verbose("Key bindings: \"%s\" for temporary clock, \"%s\" for permanent toggle", user_opts.tempkey, user_opts.permakey)
