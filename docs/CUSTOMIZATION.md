@@ -15,6 +15,7 @@ Create a `osc-clock.conf` file inside the mpv `script-opts` directory.
 |  `font`         |  Set font                                                                               |  `FO-TVASAHI-GMorning` |
 |  `fontsize`     |  Set font size                                                                          |        `48`            |
 |  `fontbold`     |  Set font bold                                                                          |        `no`            |
+|  `fontitalic`   |  Set font italic                                                                        |        `no`            |
 |  `fontcolor`    |  Set font color (format: RRGGBB)                                                        |        `FFFFFF`        |
 |  `fontalpha`    |  Set font transparency                                                                  |        `0`             |
 |  `bordersize`   |  Set border size, set `0` to disable the border                                         |        `4`             |

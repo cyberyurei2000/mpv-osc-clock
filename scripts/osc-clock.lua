@@ -9,6 +9,7 @@ local user_opts = {
     font        = "FO-TVASAHI-GMorning",  -- Set font
     fontsize    = 48,                     -- Set font size
     fontbold    = false,                  -- Set font bold
+    fontitalic  = false,                  -- Set font italic
     fontcolor   = "FFFFFF",               -- Set font color (format: RRGGBB)
     fontalpha   = 0,                      -- Set font transparency
     bordersize  = 4,                      -- Set border size, set 0 to disable the border
@@ -49,12 +50,14 @@ end
 
 local function set_clock_style()
     local bold = user_opts.fontbold and 1 or 0
+    local italic = user_opts.fontitalic and 1 or 0
 
     return string.format(
-        "%s%s%s%s%s%s%s%s%s%s%s%s%s",
+        "%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
         string.format("{\\fn%s}", user_opts.font),
         string.format("{\\fs%d}", user_opts.fontsize),
         string.format("{\\b%d}", bold),
+        string.format("{\\i%d}", italic),
         format_color(user_opts.fontcolor, "1"),
         string.format("{\\alpha&H%d}", user_opts.fontalpha),
         string.format("{\\bord%d}", user_opts.bordersize),
@@ -162,7 +165,7 @@ local function toggle_clock_permanent()
 end
 
 if user_opts.onbydefault then
-    clock_toggle_permanent()
+    toggle_clock_permanent()
 end
 
 mp.add_key_binding(user_opts.tempkey, "show_clock_temp", show_clock_temp)
