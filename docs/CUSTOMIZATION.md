@@ -1,6 +1,6 @@
 # Clock Customization
 
-Create a `osc-clock.conf` file inside the mpv `script-opts` directory.
+Create a `osc-clock.conf` file inside your mpv `script-opts` directory.
 
 ```
 • Windows:    C:\Users\%username%\AppData\Roaming\mpv\script-opts\osc-clock.conf
@@ -10,107 +10,123 @@ Create a `osc-clock.conf` file inside the mpv `script-opts` directory.
 
 ## Customization options
 
-| General Options |                                      Description                                        |         Default        |
-|-----------------|-----------------------------------------------------------------------------------------|------------------------|
-|  `font`         |  Set font                                                                               |  `FO-TVASAHI-GMorning` |
-|  `fontsize`     |  Set font size                                                                          |        `48`            |
-|  `fontbold`     |  Set font bold                                                                          |        `no`            |
-|  `fontitalic`   |  Set font italic                                                                        |        `no`            |
-|  `fontcolor`    |  Set font color (format: RRGGBB)                                                        |        `FFFFFF`        |
-|  `fontalpha`    |  Set font transparency                                                                  |        `0`             |
-|  `bordersize`   |  Set border size, set `0` to disable the border                                         |        `4`             |
-|  `bordercolor`  |  Set border color (format: RRGGBB)                                                      |        `000000`        |
-|  `borderalpha`  |  Set border transparency                                                                |        `0`             |
-|  `shadowdist`   |  Set shadow distance, set `0` to disable the shadow                                     |        `0`             |
-|  `shadowcolor`  |  Set shadow color (format: RRGGBB)                                                      |        `000000`        |
-|  `shadowalpha`  |  Set shadow transparency                                                                |        `0`             |
-|  `textspacing`  |  Set spacing between individual characters                                              |        `4`             |
-|  `edgeblur`     |  Set text edge blur, set `0` to disable                                                 |        `1`             |
-|  `tempkey`      |  Set key to toggle the clock for a brief time                                           |        `c`             |
-|  `permakey`     |  Set key to toggle the clock permanently                                                |        `C`             |
-|  `duration`     |  Set how many seconds the clock should be displayed before auto-hiding                  |        `5`             |
-|  `onbydefault`  |  Set if the clock should be toggled automatically by default                            |        `no`            |
+|     Clock Options     |                        Description                                            |         Default        |                                        Additional Info                                          |
+|-----------------------|-------------------------------------------------------------------------------|------------------------|-------------------------------------------------------------------------------------------------|
+|  `clock_font`         |  Set font                                                                     |  `FO-TVASAHI-GMorning` |                                                                                                 |
+|  `clock_fontsize`     |  Set font size                                                                |        `48`            |                                                                                                 |
+|  `clock_fontbold`     |  Set font bold                                                                |        `no`            |                                                                                                 |
+|  `clock_fontitalic`   |  Set font italic                                                              |        `no`            |                                                                                                 |
+|  `clock_fontcolor`    |  Set font color                                                               |        `FFFFFF`        |  Uses the RRGGBB format                                                                         |
+|  `clock_fontalpha`    |  Set font transparency                                                        |        `0`             |  Available values: `0` - `255`                                                                  |
+|  `clock_bordersize`   |  Set border size                                                              |        `4`             |  Set `0` to disable the border                                                                  |
+|  `clock_bordercolor`  |  Set border color                                                             |        `000000`        |  Uses the RRGGBB format                                                                         |
+|  `clock_borderalpha`  |  Set border transparency                                                      |        `0`             |  Available values: `0` - `255`                                                                  |
+|  `clock_shadowdist`   |  Set shadow distance                                                          |        `0`             |  Set `0` to disable the shadow                                                                  |
+|  `clock_shadowcolor`  |  Set shadow color                                                             |        `000000`        |  Uses the RRGGBB format                                                                         |
+|  `clock_shadowalpha`  |  Set shadow transparency                                                      |        `0`             |  Available values: `0` - `255`                                                                  |
+|  `clock_textspacing`  |  Set spacing between individual characters                                    |        `4`             |                                                                                                 |
+|  `clock_edgeblur`     |  Set text edge blur                                                           |        `1`             |  Set `0` to disable it                                                                          |
+|  `clock_posx`         |  Set X position on screen                                                     |        `32`            |                                                                                                 |
+|  `clock_posy`         |  Set Y position on screen                                                     |        `28`            |                                                                                                 |
+|  `clock_format`       |  Set time format                                                              |        `%H:%M`         |  Learn more at ([?](https://www.lua.org/pil/22.1.html)); will be ignored if `formatsmp` is set  |
+|  `clock_formatsmp`    |  Toggle between a simplified 12h format                                       |        `2`             |  Available options: `0`: Disabled; `1`: No blank space; `2`: Add blank space                    |
 
-|  Clock Options  |                                      Description                                        |         Default        |
-|-----------------|-----------------------------------------------------------------------------------------|------------------------|
-|  `clockposx`    |  Set clock X position on screen                                                         |        `32`            |
-|  `clockposy`    |  Set clock Y position on screen                                                         |        `28`            |
-|  `format`       |  Set time format (learn more at ([?](https://www.lua.org/pil/22.1.html)) (will be ignored if `formatsmp` is set) |        `%H:%M`        |
-|  `formatsmp`    |  Toggle between a simplified 12h format (`2` or `1`), set `0` to disable                |         `2`            |
+|     Date Options      |                        Description                                            |         Default        |                                        Additional Info                                          |
+|-----------------------|-------------------------------------------------------------------------------|------------------------|-------------------------------------------------------------------------------------------------|
+|  `date_enable`        |  Toggle date                                                                  |        `no`            |                                                                                                 |
+|  `date_posx`          |  Set X position on screen                                                     |        `82`            |                                                                                                 |
+|  `date_posy`          |  Set Y position on screen                                                     |        `88`            |                                                                                                 |
+|  `date_format`        |  Set date format                                                              |      `%Y/%m/%d`        |  Learn more at ([?](https://www.lua.org/pil/22.1.html))                                         |
+|  `date_useclockopt`   |  Use the same configuration as the clock                                      |        `no`            |  All date options bellow will be ignored if enabled                                             |
+|  `date_font`          |  Set font                                                                     |        ` `             |                                                                                                 |
+|  `date_fontsize`      |  Set font size                                                                |        `30`            |                                                                                                 |
+|  `date_fontbold`      |  Set font bold                                                                |        `yes`           |                                                                                                 |
+|  `date_fontitalic`    |  Set font italic                                                              |        `no`            |                                                                                                 |
+|  `date_fontcolor`     |  Set font color                                                               |        `FFFFFF`        |  Uses the RRGGBB format                                                                         |
+|  `date_fontalpha`     |  Set font transparency                                                        |        `0`             |  Available values: `0` - `255`                                                                  |
+|  `date_bordersize`    |  Set border size                                                              |        `1`             |  Set `0` to disable the border                                                                  |
+|  `date_bordercolor`   |  Set border color                                                             |        `000000`        |  Uses the RRGGBB format                                                                         |
+|  `date_borderalpha`   |  Set border transparency                                                      |        `0`             |  Available values: `0` - `255`                                                                  |
+|  `date_shadowdist`    |  Set shadow distance                                                          |        `0`             |  Set `0` to disable the shadow                                                                  |
+|  `date_shadowcolor`   |  Set shadow color                                                             |        `000000`        |  Uses the RRGGBB format                                                                         |
+|  `date_shadowalpha`   |  Set shadow transparency                                                      |        `0`             |  Available values: `0` - `255`                                                                  |
+|  `date_textspacing`   |  Set spacing between individual characters                                    |        `4`             |                                                                                                 |
+|  `date_edgeblur`      |  Set text edge blur                                                           |        `1`             |  Set `0` to disable it                                                                          |
 
-|  Date Options   |                                      Description                                        |         Default        |
-|-----------------|-----------------------------------------------------------------------------------------|------------------------|
-|  `date`         |  Toggle date                                                                            |        `no`            |
-|  `dateposx`     |  Set X position of the date on screen                                                   |        `52`            |
-|  `dateposy`     |  Set Y position of the date on screen                                                   |        `58`            |
-|  `dateformat`   |  Set date format ([?](https://www.lua.org/pil/22.1.html))                               |      `%Y/%m/%d`        |
+|   General Options    |                                      Description                               |         Default        |                                        Additional Info                                          |
+|----------------------|--------------------------------------------------------------------------------|------------------------|-------------------------------------------------------------------------------------------------|
+|  `tempkey`           |  Set key to toggle the clock for a brief time                                  |        `c`             |                                                                                                 |
+|  `permakey`          |  Set key to toggle the clock permanently                                       |        `C`             |                                                                                                 |
+|  `duration`          |  Set how many seconds the clock should be displayed before auto-hiding         |        `5`             |                                                                                                 |
+|  `onbydefault`       |  Set if the clock should be toggled automatically by default                   |        `no`            |  Available options: `no`: Disable; `yes`: Enable; `onlyfs`: Enable only in fullscreen           |
 
 ### Examples
 
 Here some examples of possible customizations that can be done:
 
 ```ini
-font=Globoface 2002
-fontsize=60
-fontbold=no
-fontcolor=FFFFFF
-bordersize=1
-bordercolor=000000
-shadowdist=4
-shadowcolor=000000
-shadowalpha=60
-textspacing=0
-edgeblur=0
-clockposx=70
-clockposy=30
-format=%H:%M:%S
-formatsmp=0
+clock_font=Globoface 2002
+clock_fontsize=60
+clock_fontbold=no
+clock_fontcolor=FFFFFF
+clock_bordersize=1
+clock_bordercolor=000000
+clock_shadowdist=4
+clock_shadowcolor=000000
+clock_shadowalpha=60
+clock_textspacing=0
+clock_edgeblur=0
+clock_posx=70
+clock_posy=30
+clock_format=%H:%M:%S
+clock_formatsmp=0
 ```
 
 ![Screenshot2](/docs/assets/screenshot2.png)
 
 ```ini
-font=Comic Sans MS
-fontsize=50
-fontbold=yes
-fontcolor=FF0000
-bordersize=2
-bordercolor=FFFF00
-shadowdist=3
+clock_font=Comic Sans MS
+clock_fontsize=50
+clock_fontbold=yes
+clock_fontcolor=FF0000
+clock_bordersize=2
+clock_bordercolor=FFFF00
+clock_shadowdist=3
 ```
 
 ![Screenshot3](/docs/assets/screenshot3.png)
 
 ```ini
-font=FO-NHKTIMER-2021
-bordersize=2
-borderalpha=10
-shadowdist=0.5
-shadowalpha=50
-textspacing=4
-edgeblur=2
-clockposx=44
-clockposy=25
-formatsmp=2
+clock_font=FO-NHKTIMER-2021
+clock_bordersize=2
+clock_borderalpha=10
+clock_shadowdist=0.5
+clock_shadowalpha=50
+clock_textspacing=4
+clock_edgeblur=2
+clock_posx=44
+clock_posy=25
+clock_formatsmp=2
 ```
 
 ![Screenshot4](/docs/assets/screenshot4.png)
 
 ```ini
-font=NanumGothic
-fontsize=35
-fontbold=yes
-bordersize=0
-shadowdist=2
-textspacing=0
-edgeblur=0
-clockposx=52
-clockposy=60
-formatsmp=1
-date=yes
-dateposx=50
-dateposy=26
-dateformat=%d (%a)
+clock_font=NanumGothic
+clock_fontsize=35
+clock_fontbold=yes
+clock_bordersize=0
+clock_shadowdist=2
+clock_textspacing=0
+clock_edgeblur=0
+clock_posx=52
+clock_posy=60
+clock_formatsmp=1
+date_enable=yes
+date_posx=50
+date_posy=26
+date_format=%d (%a)
+date_useclockopt=yes
 ```
 
 ![Screenshot5](/docs/assets/screenshot5.png)
