@@ -266,7 +266,7 @@
     2025/10/20 ver 2.01
         Features:
             ・When enabling or disabling the clock, a message will be display on the OSD
-                ・You can disable or reenable it with the "showosdmsg" option
+                ・You can disable or re-enable it with the "showosdmsg" option
 
     2025/08/15 ver 2.00
         Features:
