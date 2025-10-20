@@ -4,7 +4,7 @@
 
 -- parameters: default user option values
 -- change them using osc-clock.conf in the script-opts directory
--- for more info, check the README.txt or CUSTOMIZATION.md on the online repository
+-- for more info, check the README.txt or CUSTOMIZATION.md in the online repository
 local user_opts = {
     -- Clock
     clock_font        = "FO-TVASAHI-GMorning",  -- Set clock font
@@ -49,6 +49,7 @@ local user_opts = {
     tempkey           = "c",                    -- Set key to toggle the clock for a brief time
     permakey          = "C",                    -- Set key to toggle the clock permanently
     duration          = 5,                      -- Set how many seconds the clock should be displayed before auto-hiding
+    showosdmsg        = true,                   -- Toggle OSD messages
     onbydefault       = "no",                   -- Set if the clock should be toggled automatically by default
 }
 
@@ -59,6 +60,7 @@ local timer = nil
 local hide_timer = nil
 local is_shown = false
 local is_permanent = false
+local show_msg = user_opts.showosdmsg
 
 local clock_pos = string.format("{\\pos(%d,%d)}", user_opts.clock_posx, user_opts.clock_posy)
 local date_pos = string.format("{\\pos(%d, %d)}", user_opts.date_posx, user_opts.date_posy)
@@ -201,12 +203,20 @@ local function toggle_clock_permanent()
             end
             is_shown = false
             is_permanent = false
+
+            if show_msg then
+                mp.osd_message("Clock disabled")
+            end
         else
             clock()
 
             timer = mp.add_periodic_timer(1, clock)
             is_shown = true
             is_permanent = true
+
+            if show_msg then
+                mp.osd_message("Clock enabled")
+            end
         end
     end
 end
@@ -217,6 +227,10 @@ elseif user_opts.onbydefault == "fsonly" then
     mp.observe_property("fullscreen", "bool", function(name, is_fullscreen)
         if is_fullscreen then
             toggle_clock_permanent()
+
+            if show_msg then
+                mp.osd_message("Clock automatically enabled")
+            end
         else
             hide_clock()
         end

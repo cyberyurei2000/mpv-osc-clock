@@ -263,11 +263,16 @@
 
 
 ■ 6. Changelog
+    2025/10/20 ver 2.01
+        Features:
+            ・When enabling or disabling the clock, a message will be display on the OSD
+                ・You can disable or reenable it with the "showosdmsg" option
+
     2025/08/15 ver 2.00
         Features:
             ・You can now customize the style of the date just like the clock
                 ・Because of this, the "date_useclockopt" option was added to make the date use the same configuration as the clock
-                ・WARNING: this change also renames all the clock and date related options, check Clock Customization docs for more information
+                ・WARNING: this change also renames all clock and date related options, check Clock Customization docs for more information
             ・"onbydefault" has now has a new option to toggle the clock only when the player goes fullscreen ("onlyfs")
             ・Releases now ship with README.txt
 
