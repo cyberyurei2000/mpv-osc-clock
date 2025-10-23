@@ -58,6 +58,7 @@ Create a `osc-clock.conf` file inside your mpv `script-opts` directory.
 |  `tempkey`           |  Set key to toggle the clock for a brief time                                  |        `c`             |                                                                                                 |
 |  `permakey`          |  Set key to toggle the clock permanently                                       |        `C`             |                                                                                                 |
 |  `duration`          |  Set how many seconds the clock should be displayed before auto-hiding         |        `5`             |                                                                                                 |
+|  `showosdmsg`        |  Toggle OSD messages                                                           |        `yes`           |                                                                                                 |
 |  `onbydefault`       |  Set if the clock should be toggled automatically by default                   |        `no`            |  Available options: `no`: Disable; `yes`: Enable; `onlyfs`: Enable only in fullscreen           |
 
 ### Examples
