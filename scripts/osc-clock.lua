@@ -50,7 +50,8 @@ local user_opts = {
     permakey          = "C",                    -- Set key to toggle the clock permanently
     duration          = 5,                      -- Set how many seconds the clock should be displayed before auto-hiding
     showosdmsg        = true,                   -- Toggle OSD messages
-    onbydefault       = "no",                   -- Set if the clock should be toggled automatically by default
+    autoenable       = "no",                    -- Set if the clock should be toggled automatically by default
+    autoenable_langs = "jpn, jp, kor, ko"       -- List languages for the clock to auto enable it
 }
 
 (require "mp.options").read_options(user_opts, "osc-clock")
@@ -221,9 +222,40 @@ local function toggle_clock_permanent()
     end
 end
 
-if user_opts.onbydefault == "yes" then
+local function check_audiolang()
+    local track_list = mp.get_property_native("track-list")
+    local lang_list = {}
+
+    for lang in string.gmatch(user_opts.autoenable_langs, "([^,]+)") do
+        lang_list[string.lower(lang:gsub("%s+", ""))] = true
+    end
+
+    for _, track in ipairs(track_list) do
+        if track.type == "audio" and track.lang then
+            local track_lang = string.lower(track.lang:gsub("%s+", ""))
+            if lang_list[track_lang] then
+                return true
+            end
+        end
+    end
+
+    return false
+end
+
+local function show_clock_bylang()
+    if check_audiolang() then
+        if not is_shown then
+            toggle_clock_permanent()
+            if show_msg then
+                mp.osd_message("Clock automatically enabled (audio language match)")
+            end
+        end
+    end
+end
+
+if user_opts.autoenable == "yes" then
     toggle_clock_permanent()
-elseif user_opts.onbydefault == "fsonly" then
+elseif user_opts.autoenable == "fsonly" then
     mp.observe_property("fullscreen", "bool", function(name, is_fullscreen)
         if is_fullscreen then
             toggle_clock_permanent()
@@ -234,6 +266,10 @@ elseif user_opts.onbydefault == "fsonly" then
         else
             hide_clock()
         end
+    end)
+elseif user_opts.autoenable == "bylang" then
+    mp.register_event("file-loaded", function()
+        mp.add_timeout(0.1, show_clock_bylang)
     end)
 end
 

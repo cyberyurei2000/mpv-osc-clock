@@ -138,9 +138,10 @@
         clock_formatsmp
             ・Toggle between a simplified 12h format
             ・Default: 2
-            ・Available options: 0: Disable
-                                 1: No blank space
-                                 2: Add blank space
+            ・Available options:
+                - 0: Disable
+                - 1: No blank space
+                - 2: Add blank space
 
     ◎Date options
         date_enable
@@ -243,13 +244,18 @@
             ・Set how many seconds the clock should be displayed before auto-hiding
             ・Default: 5
 
-        onbydefault
+        autoenable
             ・Set if the clock should be toggled automatically by default
             ・Default: no
-            ・Available options: no: Disable
-                                 yes: Enable
-                                 onlyfs: Enable only in fullscreen
+            ・Available options:
+                - no: Disable
+                - yes: Enable
+                - onlyfs: Enable only in fullscreen
+                - bylang: Enable by a audio track language specified by the user (only works if the audio track has a language metadata)
 
+        autoenable_langs
+            ・List languages for the clock to autoenable it
+            ・TODO
 
 ■ 5. Credits
     The font "FO-TVASAHI-GMorning.otf" and the other fonts found in
