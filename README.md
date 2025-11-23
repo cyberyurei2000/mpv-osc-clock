@@ -21,7 +21,7 @@ To toggle it permanently, press the `C` key.
 • MacOS:      ~/Library/Application Support/mpv/
 ```
 
-### Folder Structure ([?](https://mpv.io/manual/master/#files))
+### Folder Structure
 ```
 mpv/
 ├── fonts/
@@ -31,6 +31,8 @@ mpv/
 └── scripts/
 	└── osc-clock.lua
 ```
+
+For more information, access the [mpv documentation](https://mpv.io/manual/master/#files).
 
 ## Customization
 

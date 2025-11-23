@@ -2,7 +2,7 @@
     mpv-osc-clock
     Copyright (c) cyberyurei2000 2024-2025
 
-    README                         ver 2.00
+    README                         ver NEXT
 -----------------------------------------------
 
 ■ Table of content
