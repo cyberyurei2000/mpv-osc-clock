@@ -29,7 +29,7 @@ Create a `osc-clock.conf` file inside your mpv `script-opts` directory.
 |  `clock_posx`         |  Set X position on screen                                                     |        `32`            |                                                                                                 |
 |  `clock_posy`         |  Set Y position on screen                                                     |        `28`            |                                                                                                 |
 |  `clock_format`       |  Set time format                                                              |        `%H:%M`         |  Learn more at ([?](https://www.lua.org/pil/22.1.html)); will be ignored if `formatsmp` is set  |
-|  `clock_formatsmp`    |  Toggle between a simplified 12h format                                       |        `2`             |  Available options: `0`: Disabled; `1`: No blank space; `2`: Add blank space                    |
+|  `clock_formatsmp`    |  Toggle between a simplified 12h format                                       |        `2`             |  Available options:<br> `0`: Disabled;<br> `1`: No blank space;<br> `2`: Add blank space;<br>   |
 
 |     Date Options      |                        Description                                            |         Default        |                                        Additional Info                                          |
 |-----------------------|-------------------------------------------------------------------------------|------------------------|-------------------------------------------------------------------------------------------------|
@@ -53,13 +53,17 @@ Create a `osc-clock.conf` file inside your mpv `script-opts` directory.
 |  `date_textspacing`   |  Set spacing between individual characters                                    |        `4`             |                                                                                                 |
 |  `date_edgeblur`      |  Set text edge blur                                                           |        `1`             |  Set `0` to disable it                                                                          |
 
-|   General Options    |                                      Description                               |         Default        |                                        Additional Info                                          |
-|----------------------|--------------------------------------------------------------------------------|------------------------|-------------------------------------------------------------------------------------------------|
-|  `tempkey`           |  Set key to toggle the clock for a brief time                                  |        `c`             |                                                                                                 |
-|  `permakey`          |  Set key to toggle the clock permanently                                       |        `C`             |                                                                                                 |
-|  `duration`          |  Set how many seconds the clock should be displayed before auto-hiding         |        `5`             |                                                                                                 |
-|  `showosdmsg`        |  Toggle OSD messages                                                           |        `yes`           |                                                                                                 |
-|  `onbydefault`       |  Set if the clock should be toggled automatically by default                   |        `no`            |  Available options: `no`: Disable; `yes`: Enable; `onlyfs`: Enable only in fullscreen           |
+|   General Options    |                                      Description                               |         Default        |                                            Additional Info                                          |
+|----------------------|--------------------------------------------------------------------------------|------------------------|-----------------------------------------------------------------------------------------------------|
+|  `tempkey`           |  Set key to toggle the clock for a brief time                                  |        `c`             |                                                                                                     |
+|  `permakey`          |  Set key to toggle the clock permanently                                       |        `C`             |                                                                                                     |
+|  `duration`          |  Set how many seconds the clock should be displayed before auto-hiding         |        `5`             |                                                                                                     |
+|  `showosdmsg`        |  Toggle OSD messages                                                           |        `yes`           |                                                                                                     |
+|  `onbydefault`       |  Set if the clock should be toggled automatically by default                   |        `no`            |  Available options:<br> `no`: Disable;<br> `yes`: Enable;<br> `onlyfs`: Enable only in fullscreen;  |
+<!--
+|  `autoenable`        |  Set if the clock should be toggled automatically by default                   |        `no`            |  Available options:<br> `no`: Disable;<br> `yes`: Enable;<br> `onlyfs`: Enable only in fullscreen;<br> `bylang`: Enable via an audio track language specified by the user (only works if the audio track has a language metadata);  |
+|  `autoenable_langs`  |  List languages for the clock to autoenable it                                 |   `jpn, jp, kor, ko`   |  Only works if `autoenable` is set to `bylang`                                                                                                                                                                                      |
+-->
 
 ### Examples
 

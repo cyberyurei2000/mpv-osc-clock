@@ -251,11 +251,12 @@
                 - no: Disable
                 - yes: Enable
                 - onlyfs: Enable only in fullscreen
-                - bylang: Enable by a audio track language specified by the user (only works if the audio track has a language metadata)
+                - bylang: Enable via an audio track language specified by the user (only works if the audio track has a language metadata)
 
         autoenable_langs
             ・List languages for the clock to autoenable it
-            ・TODO
+            ・Default: jpn, jp, kor, ko
+            ・Only works if "autoenable" is set to "bylang"
 
 ■ 5. Credits
     The font "FO-TVASAHI-GMorning.otf" and the other fonts found in
