@@ -1,6 +1,6 @@
 -----------------------------------------------
     mpv-osc-clock
-    Copyright (c) cyberyurei2000 2024-2025
+    Copyright (c) cyberyurei2000 2024-2026
 
     README                         ver NEXT
 -----------------------------------------------
