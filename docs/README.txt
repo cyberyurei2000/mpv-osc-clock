@@ -2,7 +2,7 @@
     mpv-osc-clock
     Copyright (c) cyberyurei2000 2024-2026
 
-    README                         ver NEXT
+    README                         ver 3.00
 -----------------------------------------------
 
 ■ Table of content
@@ -22,7 +22,6 @@
 ■ 2. How to use?
     By default, press the "c" key to display the clock for a brief time.
   To toggle it permanently, press the "C" key.
-
 
 ■ 3. Setup
     1. Place the file "osc-clock.lua" inside your mpv scripts directory.
@@ -44,7 +43,6 @@
 
         For more info, access: https://mpv.io/manual/master/#files
     ----------------------------------------------------------------------------
-
 
 ■ 4. Customization
     Create a "osc-clock.conf" file inside your mpv script-opts directory
@@ -133,7 +131,7 @@
             ・Set time format
             ・Default: %H:%M
             ・Learn more at https://www.lua.org/pil/22.1.html
-            ・Will be ignored if "formatsmp" is set
+            ・Will be ignored if "clock_formatsmp" is set
 
         clock_formatsmp
             ・Toggle between a simplified 12h format
@@ -244,6 +242,11 @@
             ・Set how many seconds the clock should be displayed before auto-hiding
             ・Default: 5
 
+        locale
+            ・Set your prefered locale, by default it uses lua's default (english)
+            ・Default:
+            ・Uses language tags, ex.: "en_GB.UTF8" for British English or "zh_CN.UTF8" for Simplified Chinese
+
         autoenable
             ・Set if the clock should be toggled automatically by default
             ・Default: no
@@ -268,8 +271,11 @@
     ◎Source (Dead): https://www.dropbox.com/scl/fi/3lir00hds4o3xqr6hdwea/TV-TIMER-FONT-V1.zip?rlkey=xgnqhdotec8a9kf25nck7azg7&e=1&dl=0
     ----------------------------------------------------------------------------
 
-
 ■ 6. Changelog
+    2026/XX/XX ver 3.00
+        Features:
+            TODO
+
     2025/10/20 ver 2.01
         Features:
             ・When enabling or disabling the clock, a message will be display on the OSD

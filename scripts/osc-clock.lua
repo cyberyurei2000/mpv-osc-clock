@@ -23,7 +23,7 @@ local user_opts = {
     clock_edgeblur    = 1,                      -- Set clock text edge blur, set 0 to disable
     clock_posx        = 32,                     -- Set clock X position on screen
     clock_posy        = 28,                     -- Set clock Y position on screen
-    clock_format      = "%H:%M",                -- Set time format (learn more at https://www.lua.org/pil/22.1.html) (will be ignored if formatsmp is set)
+    clock_format      = "%H:%M",                -- Set time format (learn more at https://www.lua.org/pil/22.1.html) (will be ignored if clock_formatsmp is set)
     clock_formatsmp   = 2,                      -- Toggle between a simplified 12h format
     -- Date
     date_enable       = false,                  -- Toggle date
@@ -50,8 +50,9 @@ local user_opts = {
     permakey          = "C",                    -- Set key to toggle the clock permanently
     duration          = 5,                      -- Set how many seconds the clock should be displayed before auto-hiding
     showosdmsg        = true,                   -- Toggle OSD messages
-    autoenable       = "no",                    -- Set if the clock should be toggled automatically by default
-    autoenable_langs = "jpn, jp, kor, ko"       -- List languages for the clock to auto enable it
+    locale            = "",                     -- Set your prefered locale, by default it uses lua's default (english)
+    autoenable        = "no",                   -- Set if the clock should be toggled automatically by default
+    autoenable_langs  = "jpn, jp, kor, ko"      -- List languages for the clock to auto enable it
 }
 
 (require "mp.options").read_options(user_opts, "osc-clock")
@@ -65,6 +66,10 @@ local show_msg = user_opts.showosdmsg
 
 local clock_pos = string.format("{\\pos(%d,%d)}", user_opts.clock_posx, user_opts.clock_posy)
 local date_pos = string.format("{\\pos(%d, %d)}", user_opts.date_posx, user_opts.date_posy)
+
+if user_opts.locale ~= "" then
+    os.setlocale(user_opts.locale)
+end
 
 local function format_color(color, prefix)
     return string.format("{\\%sc&H%s&}", prefix, string.reverse(color))
