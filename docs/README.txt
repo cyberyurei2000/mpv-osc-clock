@@ -230,17 +230,18 @@
             ・Set it 0 to disable it
 
     ◎General options
-        tempkey
-            ・Set key to toggle the clock for a brief time
-            ・Default: c
-
-        permakey
-            ・Set key to toggle the clock permanently
-            ・Default: C
-
         duration
             ・Set how many seconds the clock should be displayed before auto-hiding
             ・Default: 5
+
+        showosdmsg
+            ・Toggle OSD messages
+            ・Default: yes
+
+        fade
+            ・Turn the clock transparent with a hotkey
+            ・Default: 80
+            ・Set 0 to disable it. Available values: 0 - 255
 
         locale
             ・Set your prefered locale, by default it uses lua's default (english)
@@ -260,6 +261,18 @@
             ・List languages for the clock to autoenable it
             ・Default: jpn, jp, kor, ko
             ・Only works if "autoenable" is set to "bylang"
+
+        tempkey
+            ・Set key to toggle the clock for a brief time
+            ・Default: c
+
+        permakey
+            ・Set key to toggle the clock permanently
+            ・Default: C
+
+        fadekey
+            ・Set key for the fade clock feature
+            ・Default: ;
 
 ■ 5. Credits
     The font "FO-TVASAHI-GMorning.otf" and the other fonts found in

@@ -46,13 +46,15 @@ local user_opts = {
     date_textspacing  = 4,                      -- Set date spacing between individual characters
     date_edgeblur     = 1,                      -- Set date text edge blur, set 0 to disable
     -- General
-    tempkey           = "c",                    -- Set key to toggle the clock for a brief time
-    permakey          = "C",                    -- Set key to toggle the clock permanently
     duration          = 5,                      -- Set how many seconds the clock should be displayed before auto-hiding
     showosdmsg        = true,                   -- Toggle OSD messages
+    fade              = 80,                     -- Turn the clock transparent with a hotkey, set 0 to disable
     locale            = "",                     -- Set your prefered locale, by default it uses lua's default (english)
     autoenable        = "no",                   -- Set if the clock should be toggled automatically by default
-    autoenable_langs  = "jpn, jp, kor, ko"      -- List languages for the clock to auto enable it
+    autoenable_langs  = "jpn, jp, kor, ko",     -- List languages for the clock to auto enable it
+    tempkey           = "c",                    -- Set key to toggle the clock for a brief time
+    permakey          = "C",                    -- Set key to toggle the clock permanently
+    fadekey           = ";",                    -- Set key for the fade clock feature
 }
 
 (require "mp.options").read_options(user_opts, "osc-clock")
@@ -62,7 +64,17 @@ local timer = nil
 local hide_timer = nil
 local is_shown = false
 local is_permanent = false
+local is_fade = false
 local show_msg = user_opts.showosdmsg
+
+local current_alpha = {
+    clockfont = user_opts.clock_fontalpha,
+    clockborder = user_opts.clock_borderalpha,
+    clockshadow = user_opts.clock_shadowalpha,
+    datefont = user_opts.date_fontalpha,
+    dateborder = user_opts.date_borderalpha,
+    dateshadow = user_opts.date_shadowalpha
+}
 
 local clock_pos = string.format("{\\pos(%d,%d)}", user_opts.clock_posx, user_opts.clock_posy)
 local date_pos = string.format("{\\pos(%d, %d)}", user_opts.date_posx, user_opts.date_posy)
@@ -86,13 +98,13 @@ local function set_clock_style()
         string.format("{\\b%d}", clock_bold),
         string.format("{\\i%d}", clock_italic),
         format_color(user_opts.clock_fontcolor, "1"),
-        string.format("{\\alpha&H%d}", user_opts.clock_fontalpha),
+        string.format("{\\alpha&H%X&}", current_alpha.clockfont),
         string.format("{\\bord%d}", user_opts.clock_bordersize),
         format_color(user_opts.clock_bordercolor, "3"),
-        string.format("{\\3a&H%d}", user_opts.clock_borderalpha),
+        string.format("{\\3a&H%X&}", current_alpha.clockborder),
         string.format("{\\shad%d}", user_opts.clock_shadowdist),
         format_color(user_opts.clock_shadowcolor, "4"),
-        string.format("{\\4a&H%d}", user_opts.clock_shadowalpha),
+        string.format("{\\4a&H%X&}", current_alpha.clockshadow),
         string.format("{\\fsp%d}", user_opts.clock_textspacing),
         string.format("{\\blur%d}", user_opts.clock_edgeblur)
     )
@@ -109,13 +121,13 @@ local function set_date_style()
         string.format("{\\b%d}", date_bold),
         string.format("{\\i%d}", date_italic),
         format_color(user_opts.date_fontcolor, "1"),
-        string.format("{\\alpha&H%d}", user_opts.date_fontalpha),
+        string.format("{\\alpha%d}", current_alpha.datefont),
         string.format("{\\bord%d}", user_opts.date_bordersize),
         format_color(user_opts.date_bordercolor, "3"),
-        string.format("{\\3a&H%d}", user_opts.date_borderalpha),
+        string.format("{\\3a%d}", current_alpha.dateborder),
         string.format("{\\shad%d}", user_opts.date_shadowdist),
         format_color(user_opts.date_shadowcolor, "4"),
-        string.format("{\\4a&H%d}", user_opts.date_shadowalpha),
+        string.format("{\\4a%d}", current_alpha.dateshadow),
         string.format("{\\fsp%d}", user_opts.date_textspacing),
         string.format("{\\blur%d}", user_opts.date_edgeblur)
     )
@@ -258,6 +270,28 @@ local function show_clock_bylang()
     end
 end
 
+local function update_alpha()
+    if is_shown then
+        if not is_fade then
+            for key, value in pairs(current_alpha) do
+                current_alpha[key] = value + user_opts.fade
+            end
+
+            is_fade = true
+            mp.osd_message("Fade on")
+        else
+            for key, value in pairs(current_alpha) do
+                current_alpha[key] = value - user_opts.fade
+            end
+
+            is_fade = false
+            mp.osd_message("Fade off")
+        end
+
+        clock()
+    end
+end
+
 if user_opts.autoenable == "yes" then
     toggle_clock_permanent()
 elseif user_opts.autoenable == "fsonly" then
@@ -280,4 +314,10 @@ end
 
 mp.add_key_binding(user_opts.tempkey, "show_clock_temp", show_clock_temp)
 mp.add_key_binding(user_opts.permakey, "toggle_clock_permanent", toggle_clock_permanent)
-mp.msg.verbose("Key bindings: \"%s\" for temporary clock, \"%s\" for permanent toggle", user_opts.tempkey, user_opts.permakey)
+if user_opts.fade > 0 then
+    mp.add_key_binding(user_opts.fadekey, "update_alpha", update_alpha)
+end
+mp.msg.verbose(
+    "Key bindings: \"%s\" for temporary clock, \"%s\" for permanent toggle, \"%s\" for fade clock",
+    user_opts.tempkey, user_opts.permakey, user_opts.fadekey
+)
