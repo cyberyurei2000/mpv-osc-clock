@@ -19,9 +19,11 @@
 
     This project is licensed under the BSD 3-Clause License, check the "LICENSE" file for more details.
 
+
 ■ 2. How to use?
     By default, press the "c" key to display the clock for a brief time.
   To toggle it permanently, press the "C" key.
+
 
 ■ 3. Setup
     1. Place the file "osc-clock.lua" inside your mpv scripts directory.
@@ -43,6 +45,7 @@
 
         For more info, access: https://mpv.io/manual/master/#files
     ----------------------------------------------------------------------------
+
 
 ■ 4. Customization
     Create a "osc-clock.conf" file inside your mpv script-opts directory
@@ -274,6 +277,7 @@
             ・Set key for the fade clock feature
             ・Default: ;
 
+
 ■ 5. Credits
     The font "FO-TVASAHI-GMorning.otf" and the other fonts found in
   "TV-TIMER-FONT-V1.zip" was made by @tvoped on Twitter
@@ -284,10 +288,20 @@
     ◎Source (Dead): https://www.dropbox.com/scl/fi/3lir00hds4o3xqr6hdwea/TV-TIMER-FONT-V1.zip?rlkey=xgnqhdotec8a9kf25nck7azg7&e=1&dl=0
     ----------------------------------------------------------------------------
 
+
 ■ 6. Changelog
-    2026/XX/XX ver 3.00
+    2026/04/09 ver 3.00
         Features:
-            TODO
+            ・"onbydefault" option was renamed to "autoenable"
+            ・"autoenable" has now has a new option to toggle the clock only if detects a audio track language specified by the user ("bylang")
+                ・ To specify the languages, check the "autoenable_langs" option
+                ・This feature only works if the audio track has a language metadata
+            ・It's now possible to make the clock transparent with a hotkey using the new "fade" option
+                ・By default it uses the ; key, but it's customizable with the "fadekey" option
+            ・There is a new "locale" option to set your prefered language locale
+                ・By default it set to english, but you can set your own locale by using the language tag of your language (ex.: "en_GB.UTF8" for British English or "zh_CN.UTF8" for Simplified Chinese)
+        Bugfixes:
+            ・Fix "clock_fontalpha", "clock_borderalpha", "clock_shadowalpha", "date_fontalpha", "date_borderalpha", "date_shadowalpha" which couldn't be set above 99
 
     2025/10/20 ver 2.01
         Features:
@@ -306,7 +320,7 @@
         Features:
             ・Added option to set font italic through the "fontitalic" option
             ・Source code improvements
-        Bugfixes
+        Bugfixes:
             ・Fix "onbydefault" option, which was non-functional in previous releases
 
     2025/07/31 ver 1.01

@@ -55,16 +55,15 @@ Create a `osc-clock.conf` file inside your mpv `script-opts` directory.
 
 |   General Options    |                                      Description                               |         Default        |                                            Additional Info                                          |
 |----------------------|--------------------------------------------------------------------------------|------------------------|-----------------------------------------------------------------------------------------------------|
-|  `tempkey`           |  Set key to toggle the clock for a brief time                                  |        `c`             |                                                                                                     |
-|  `permakey`          |  Set key to toggle the clock permanently                                       |        `C`             |                                                                                                     |
 |  `duration`          |  Set how many seconds the clock should be displayed before auto-hiding         |        `5`             |                                                                                                     |
 |  `showosdmsg`        |  Toggle OSD messages                                                           |        `yes`           |                                                                                                     |
-|  `onbydefault`       |  Set if the clock should be toggled automatically by default                   |        `no`            |  Available options:<br> `no`: Disable;<br> `yes`: Enable;<br> `onlyfs`: Enable only in fullscreen;  |
-<!--
-|  `locale`            |  Set your prefered locale, by default it uses lua's default (english)          |        ` `             |  Uses language tags, ex.: `en_GB.UTF8` for British English or `zh_CN.UTF8` for Simplified Chinese   |                                                                                                   |
+|  `fade`              |  Turn the clock transparent with a hotkey                                      |        `80`            |  Set 0 to disable it. Available values: 0 - 255                                                     |
+|  `locale`            |  Set your prefered locale, by default it uses lua's default (english)          |        ` `             |  Uses language tags, ex.: `en_GB.UTF8` for British English or `zh_CN.UTF8` for Simplified Chinese   |
 |  `autoenable`        |  Set if the clock should be toggled automatically by default                   |        `no`            |  Available options:<br> `no`: Disable;<br> `yes`: Enable;<br> `onlyfs`: Enable only in fullscreen;<br> `bylang`: Enable via an audio track language specified by the user (only works if the audio track has a language metadata);  |
-|  `autoenable_langs`  |  List languages for the clock to autoenable it                                 |   `jpn, jp, kor, ko`   |  Only works if `autoenable` is set to `bylang`                                                                                                                                                                                      |
--->
+|  `autoenable_langs`  |  List languages for the clock to autoenable it                                 |   `jpn, jp, kor, ko`   |  Only works if `autoenable` is set to `bylang`                                                      |
+|  `tempkey`           |  Set key to toggle the clock for a brief time                                  |        `c`             |                                                                                                     |
+|  `permakey`          |  Set key to toggle the clock permanently                                       |        `C`             |                                                                                                     |
+|  `fadekey`           |  Set key for the fade clock feature                                            |        `;`             |                                                                                                     |
 
 ### Examples
 
