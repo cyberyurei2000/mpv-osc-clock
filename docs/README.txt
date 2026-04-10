@@ -294,7 +294,7 @@
         Features:
             ・"onbydefault" option was renamed to "autoenable"
             ・"autoenable" has now has a new option to toggle the clock only if detects a audio track language specified by the user ("bylang")
-                ・ To specify the languages, check the "autoenable_langs" option
+                ・ To specify the languages, use the "autoenable_langs" option
                 ・This feature only works if the audio track has a language metadata
             ・It's now possible to make the clock transparent with a hotkey using the new "fade" option
                 ・By default it uses the ; key, but it's customizable with the "fadekey" option
