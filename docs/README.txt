@@ -299,7 +299,7 @@
             ・It's now possible to make the clock transparent with a hotkey using the new "fade" option
                 ・By default it uses the ; key, but it's customizable with the "fadekey" option
             ・There is a new "locale" option to set your prefered language locale
-                ・By default it set to english, but you can set your own locale by using the language tag of your language (ex.: "en_GB.UTF8" for British English or "zh_CN.UTF8" for Simplified Chinese)
+                ・By default it set to english, but you can set your own locale by using the language tag of your language (ex.: "en_GB.UTF-8" for British English or "zh_CN.UTF-8" for Simplified Chinese)
         Bugfixes:
             ・Fix "clock_fontalpha", "clock_borderalpha", "clock_shadowalpha", "date_fontalpha", "date_borderalpha", "date_shadowalpha" which couldn't be set above 99
 

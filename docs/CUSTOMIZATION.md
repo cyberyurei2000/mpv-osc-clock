@@ -16,13 +16,13 @@ Create a `osc-clock.conf` file inside your mpv `script-opts` directory.
 |  `clock_fontsize`     |  Set font size                                                                |        `48`            |                                                                                                 |
 |  `clock_fontbold`     |  Set font bold                                                                |        `no`            |                                                                                                 |
 |  `clock_fontitalic`   |  Set font italic                                                              |        `no`            |                                                                                                 |
-|  `clock_fontcolor`    |  Set font color                                                               |        `FFFFFF`        |  Uses the RRGGBB format                                                                         |
+|  `clock_fontcolor`    |  Set font color                                                               |        `FFFFFF`        |  Uses the `RRGGBB` format                                                                         |
 |  `clock_fontalpha`    |  Set font transparency                                                        |        `0`             |  Available values: `0` - `255`                                                                  |
 |  `clock_bordersize`   |  Set border size                                                              |        `4`             |  Set `0` to disable the border                                                                  |
-|  `clock_bordercolor`  |  Set border color                                                             |        `000000`        |  Uses the RRGGBB format                                                                         |
+|  `clock_bordercolor`  |  Set border color                                                             |        `000000`        |  Uses the `RRGGBB` format                                                                         |
 |  `clock_borderalpha`  |  Set border transparency                                                      |        `0`             |  Available values: `0` - `255`                                                                  |
 |  `clock_shadowdist`   |  Set shadow distance                                                          |        `0`             |  Set `0` to disable the shadow                                                                  |
-|  `clock_shadowcolor`  |  Set shadow color                                                             |        `000000`        |  Uses the RRGGBB format                                                                         |
+|  `clock_shadowcolor`  |  Set shadow color                                                             |        `000000`        |  Uses the `RRGGBB` format                                                                         |
 |  `clock_shadowalpha`  |  Set shadow transparency                                                      |        `0`             |  Available values: `0` - `255`                                                                  |
 |  `clock_textspacing`  |  Set spacing between individual characters                                    |        `4`             |                                                                                                 |
 |  `clock_edgeblur`     |  Set text edge blur                                                           |        `1`             |  Set `0` to disable it                                                                          |
@@ -42,13 +42,13 @@ Create a `osc-clock.conf` file inside your mpv `script-opts` directory.
 |  `date_fontsize`      |  Set font size                                                                |        `30`            |                                                                                                 |
 |  `date_fontbold`      |  Set font bold                                                                |        `yes`           |                                                                                                 |
 |  `date_fontitalic`    |  Set font italic                                                              |        `no`            |                                                                                                 |
-|  `date_fontcolor`     |  Set font color                                                               |        `FFFFFF`        |  Uses the RRGGBB format                                                                         |
+|  `date_fontcolor`     |  Set font color                                                               |        `FFFFFF`        |  Uses the `RRGGBB` format                                                                         |
 |  `date_fontalpha`     |  Set font transparency                                                        |        `0`             |  Available values: `0` - `255`                                                                  |
 |  `date_bordersize`    |  Set border size                                                              |        `1`             |  Set `0` to disable the border                                                                  |
-|  `date_bordercolor`   |  Set border color                                                             |        `000000`        |  Uses the RRGGBB format                                                                         |
+|  `date_bordercolor`   |  Set border color                                                             |        `000000`        |  Uses the `RRGGBB` format                                                                         |
 |  `date_borderalpha`   |  Set border transparency                                                      |        `0`             |  Available values: `0` - `255`                                                                  |
 |  `date_shadowdist`    |  Set shadow distance                                                          |        `0`             |  Set `0` to disable the shadow                                                                  |
-|  `date_shadowcolor`   |  Set shadow color                                                             |        `000000`        |  Uses the RRGGBB format                                                                         |
+|  `date_shadowcolor`   |  Set shadow color                                                             |        `000000`        |  Uses the `RRGGBB` format                                                                         |
 |  `date_shadowalpha`   |  Set shadow transparency                                                      |        `0`             |  Available values: `0` - `255`                                                                  |
 |  `date_textspacing`   |  Set spacing between individual characters                                    |        `4`             |                                                                                                 |
 |  `date_edgeblur`      |  Set text edge blur                                                           |        `1`             |  Set `0` to disable it                                                                          |
@@ -58,7 +58,7 @@ Create a `osc-clock.conf` file inside your mpv `script-opts` directory.
 |  `duration`          |  Set how many seconds the clock should be displayed before auto-hiding         |        `5`             |                                                                                                     |
 |  `showosdmsg`        |  Toggle OSD messages                                                           |        `yes`           |                                                                                                     |
 |  `fade`              |  Turn the clock transparent with a hotkey                                      |        `80`            |  Set `0` to disable it. Available values: `0` - `255`                                               |
-|  `locale`            |  Set your prefered locale                                                      |        ` `             |  By default it uses lua's default (english). Uses language tags, ex.: `en_GB.UTF8` for British English or `zh_CN.UTF8` for Simplified Chinese   |
+|  `locale`            |  Set your prefered locale                                                      |        ` `             |  By default it uses lua's default (english). Uses language tags, ex.: `en_GB.UTF-8` for British English or `zh_CN.UTF-8` for Simplified Chinese   |
 |  `autoenable`        |  Set if the clock should be toggled automatically by default                   |        `no`            |  Available options:<br> `no`: Disable;<br> `yes`: Enable;<br> `onlyfs`: Enable only in fullscreen;<br> `bylang`: Enable via an audio track language specified by the user (only works if the audio track has a language metadata);  |
 |  `autoenable_langs`  |  List languages for the clock to autoenable it                                 |   `jpn, jp, kor, ko`   |  Only works if `autoenable` is set to `bylang`                                                      |
 |  `tempkey`           |  Set key to toggle the clock for a brief time                                  |        `c`             |                                                                                                     |
@@ -132,6 +132,7 @@ date_posx=50
 date_posy=26
 date_format=%d (%a)
 date_useclockopt=yes
+locale=ko_KR.UTF-8
 ```
 
 ![Screenshot5](/docs/assets/screenshot5.png)
