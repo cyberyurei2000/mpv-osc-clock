@@ -247,8 +247,9 @@
             ・Set 0 to disable it. Available values: 0 - 255
 
         locale
-            ・Set your prefered locale, by default it uses lua's default (english)
+            ・Set your prefered locale
             ・Default:
+            ・By default it uses lua's default (english)
             ・Uses language tags, ex.: "en_GB.UTF8" for British English or "zh_CN.UTF8" for Simplified Chinese
 
         autoenable
@@ -290,6 +291,10 @@
 
 
 ■ 6. Changelog
+    2026/04/10 ver 3.01
+        Bugfixes:
+            ・Fix for the "showosdmsg" which couldn't disable OSD messages related to enabling or disabling the "fade" feature
+
     2026/04/09 ver 3.00
         Features:
             ・"onbydefault" option was renamed to "autoenable"

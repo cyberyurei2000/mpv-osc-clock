@@ -278,14 +278,18 @@ local function update_alpha()
             end
 
             is_fade = true
-            mp.osd_message("Fade on")
+            if show_msg then
+                mp.osd_message("Fade on")
+            end
         else
             for key, value in pairs(current_alpha) do
                 current_alpha[key] = value - user_opts.fade
             end
 
             is_fade = false
-            mp.osd_message("Fade off")
+            if show_msg then
+                mp.osd_message("Fade off")
+            end
         end
 
         clock()
