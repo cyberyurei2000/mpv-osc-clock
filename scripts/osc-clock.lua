@@ -221,20 +221,24 @@ local function toggle_clock_permanent()
             end
             is_shown = false
             is_permanent = false
-
-            if show_msg then
-                mp.osd_message("Clock disabled")
-            end
         else
             clock()
 
             timer = mp.add_periodic_timer(1, clock)
             is_shown = true
             is_permanent = true
+        end
+    end
+end
 
-            if show_msg then
-                mp.osd_message("Clock enabled")
-            end
+local function show_clock_permanent()
+    toggle_clock_permanent()
+
+    if show_msg then
+        if is_permanent then
+            mp.osd_message("Clock enabled")
+        else
+            mp.osd_message("Clock disabled")
         end
     end
 end
@@ -263,9 +267,6 @@ local function show_clock_bylang()
     if check_audiolang() then
         if not is_shown then
             toggle_clock_permanent()
-            if show_msg then
-                mp.osd_message("Clock automatically enabled (audio language match)")
-            end
         end
     end
 end
@@ -279,7 +280,7 @@ local function update_alpha()
 
             is_fade = true
             if show_msg then
-                mp.osd_message("Fade on")
+                mp.osd_message("Clock fade on")
             end
         else
             for key, value in pairs(current_alpha) do
@@ -288,7 +289,7 @@ local function update_alpha()
 
             is_fade = false
             if show_msg then
-                mp.osd_message("Fade off")
+                mp.osd_message("Clock fade off")
             end
         end
 
@@ -304,7 +305,7 @@ elseif user_opts.autoenable == "fsonly" then
             toggle_clock_permanent()
 
             if show_msg then
-                mp.osd_message("Clock automatically enabled")
+                mp.osd_message("Clock automatically enabled (fullscreen)")
             end
         else
             hide_clock()
@@ -314,10 +315,14 @@ elseif user_opts.autoenable == "bylang" then
     mp.register_event("file-loaded", function()
         mp.add_timeout(0.1, show_clock_bylang)
     end)
+
+    if show_msg then
+        mp.osd_message("Clock automatically enabled (language)")
+    end
 end
 
 mp.add_key_binding(user_opts.tempkey, "show_clock_temp", show_clock_temp)
-mp.add_key_binding(user_opts.permakey, "toggle_clock_permanent", toggle_clock_permanent)
+mp.add_key_binding(user_opts.permakey, "show_clock_permanent", show_clock_permanent)
 if user_opts.fade > 0 then
     mp.add_key_binding(user_opts.fadekey, "update_alpha", update_alpha)
 end
