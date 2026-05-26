@@ -2,7 +2,7 @@
     mpv-osc-clock
     Copyright (c) cyberyurei2000 2024-2026
 
-    README                         ver 3.00
+    README                         ver 3.02
 -----------------------------------------------
 
 ■ Table of content
@@ -291,6 +291,10 @@
 
 
 ■ 6. Changelog
+    2026/05/25 ver 3.02
+        Bugfixes:
+            ・Small fixes for the "showosdmsg" option
+
     2026/04/10 ver 3.01
         Bugfixes:
             ・Fix for the "showosdmsg" which couldn't disable OSD messages related to enabling or disabling the "fade" feature
