@@ -2,11 +2,13 @@
 -- Released under the BSD 3-Clause License
 -- https://opensource.org/license/bsd-3-clause
 
+local opt = require "mp.options"
+
 -- parameters: default user option values
 -- change them using osc-clock.conf in the script-opts directory
 -- for more info, check the README.txt or CUSTOMIZATION.md in the online repository
 local user_opts = {
-    -- Clock
+    -- Clock options
     clock_font        = "FO-TVASAHI-GMorning",  -- Set clock font
     clock_fontsize    = 48,                     -- Set clock font size
     clock_fontbold    = false,                  -- Set clock font bold
@@ -25,7 +27,7 @@ local user_opts = {
     clock_posy        = 28,                     -- Set clock Y position on screen
     clock_format      = "%H:%M",                -- Set time format (learn more at https://www.lua.org/pil/22.1.html) (will be ignored if clock_formatsmp is set)
     clock_formatsmp   = 2,                      -- Toggle between a simplified 12h format
-    -- Date
+    -- Date options
     date_enable       = false,                  -- Toggle date
     date_posx         = 82,                     -- Set X position of the date on screen
     date_posy         = 88,                     -- Set Y position of the date on screen
@@ -45,7 +47,7 @@ local user_opts = {
     date_shadowalpha  = 0,                      -- Set date shadow transparency
     date_textspacing  = 4,                      -- Set date spacing between individual characters
     date_edgeblur     = 1,                      -- Set date text edge blur, set 0 to disable
-    -- General
+    -- General options
     duration          = 5,                      -- Set how many seconds the clock should be displayed before auto-hiding
     showosdmsg        = true,                   -- Toggle OSD messages
     fade              = 80,                     -- Turn the clock transparent with a hotkey, set 0 to disable
@@ -56,8 +58,8 @@ local user_opts = {
     permakey          = "C",                    -- Set key to toggle the clock permanently
     fadekey           = ";",                    -- Set key for the fade clock feature
 }
+opt.read_options(user_opts, "osc-clock")
 
-(require "mp.options").read_options(user_opts, "osc-clock")
 local osc_clock = mp.create_osd_overlay("ass-events")
 local osc_date = mp.create_osd_overlay("ass-events")
 local timer = nil
@@ -75,7 +77,6 @@ local current_alpha = {
     dateborder = user_opts.date_borderalpha,
     dateshadow = user_opts.date_shadowalpha
 }
-
 local clock_pos = string.format("{\\pos(%d,%d)}", user_opts.clock_posx, user_opts.clock_posy)
 local date_pos = string.format("{\\pos(%d, %d)}", user_opts.date_posx, user_opts.date_posy)
 
@@ -327,6 +328,6 @@ if user_opts.fade > 0 then
     mp.add_key_binding(user_opts.fadekey, "update_alpha", update_alpha)
 end
 mp.msg.verbose(
-    "Key bindings: \"%s\" for temporary clock, \"%s\" for permanent toggle, \"%s\" for fade clock",
+    "Key bindings: \"%s\" for temporary clock, \"%s\" for permanent toggle, \"%s\" for fading the clock",
     user_opts.tempkey, user_opts.permakey, user_opts.fadekey
 )
