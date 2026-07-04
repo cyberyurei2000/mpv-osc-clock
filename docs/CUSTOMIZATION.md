@@ -8,6 +8,8 @@ Create a `osc-clock.conf` file inside your mpv `script-opts` directory.
 • MacOS:      ~/Library/Application Support/mpv/script-opts/osc-clock.conf
 ```
 
+- __OBS:__ if you're using from master, check out the [new customization guide](/docs/NEW_CUSTOMIZATION.md).
+
 ## Customization options
 
 |     Clock Options     |                        Description                                            |         Default        |                                        Additional Info                                          |
@@ -59,7 +61,7 @@ Create a `osc-clock.conf` file inside your mpv `script-opts` directory.
 |  `showosdmsg`        |  Toggle OSD messages                                                           |        `yes`           |                                                                                                     |
 |  `fade`              |  Turn the clock transparent with a hotkey                                      |        `80`            |  Set `0` to disable it. Available values: `0` - `255`                                               |
 |  `locale`            |  Set your prefered locale                                                      |        ` `             |  By default it uses Lua's default (English). Uses language tags, ex.: `en_GB.UTF-8` for British English or `zh_CN.UTF-8` for Simplified Chinese   |
-|  `autoenable`        |  Set if the clock should be toggled automatically by default                   |        `no`            |  Available options:<br> `no`: Disable;<br> `yes`: Enable;<br> `onlyfs`: Enable only in fullscreen;<br> `bylang`: Enable via an audio track language specified by the user (only works if the audio track has a language metadata);  |
+|  `autoenable`        |  Set if the clock should be toggled automatically by default                   |        `no`            |  Available options:<br> `no`: Disable;<br> `yes`: Enable;<br> `fsonly`: Enable only in fullscreen;<br> `bylang`: Enable via an audio track language specified by the user (only works if the audio track has a language metadata);  |
 |  `autoenable_langs`  |  List languages for the clock to autoenable it                                 |   `jpn, jp, kor, ko`   |  Only works if `autoenable` is set to `bylang`                                                      |
 |  `tempkey`           |  Set key to toggle the clock for a brief time                                  |        `c`             |                                                                                                     |
 |  `permakey`          |  Set key to toggle the clock permanently                                       |        `C`             |                                                                                                     |

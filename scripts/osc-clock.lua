@@ -9,13 +9,13 @@ local opt = require "mp.options"
 -- for more info, check the README.txt or CUSTOMIZATION.md in the online repository
 local user_opts = {
     -- Clock options
-    clock_font        = "FO-TVASAHI-GMorning",  -- Set clock font
+    clock_font        = "default",              -- Set clock font
     clock_fontsize    = 48,                     -- Set clock font size
-    clock_fontbold    = false,                  -- Set clock font bold
+    clock_fontbold    = true,                   -- Set clock font bold
     clock_fontitalic  = false,                  -- Set clock font italic
     clock_fontcolor   = "FFFFFF",               -- Set clock font color (format: RRGGBB)
     clock_fontalpha   = 0,                      -- Set clock font transparency
-    clock_bordersize  = 4,                      -- Set clock border size, set 0 to disable the border
+    clock_bordersize  = 2,                      -- Set clock border size, set 0 to disable the border
     clock_bordercolor = "000000",               -- Set clock border color (format: RRGGBB)
     clock_borderalpha = 0,                      -- Set clock border transparency
     clock_shadowdist  = 0,                      -- Set clock shadow distance, set 0 to disable the shadow
@@ -25,15 +25,16 @@ local user_opts = {
     clock_edgeblur    = 1,                      -- Set clock text edge blur, set 0 to disable
     clock_posx        = 32,                     -- Set clock X position on screen
     clock_posy        = 28,                     -- Set clock Y position on screen
-    clock_format      = "%H:%M",                -- Set time format (learn more at https://www.lua.org/pil/22.1.html) (will be ignored if clock_formatsmp is set)
-    clock_formatsmp   = 2,                      -- Toggle between a simplified 12h format
+    clock_format      = "12jb",                 -- Set time format, will be ignored if clock_advformat is not empty
+    clock_advformat   = "",                     -- Set time format using Lua's time notations (learn more at https://www.lua.org/pil/22.1.html)
     -- Date options
     date_enable       = false,                  -- Toggle date
-    date_posx         = 82,                     -- Set X position of the date on screen
-    date_posy         = 88,                     -- Set Y position of the date on screen
-    date_format       = "%Y/%m/%d",             -- Set date format (learn more at https://www.lua.org/pil/22.1.html)
+    date_posx         = 68,                     -- Set X position of the date on screen
+    date_posy         = 72,                     -- Set Y position of the date on screen
+    date_format       = "smp2",                 -- Set date format, will be ignored if date_advformat is not empty
+    date_advformat    = "",                     -- Set date format using Lua's date notations (learn more at https://www.lua.org/pil/22.1.html)
     date_useclockopt  = false,                  -- Use the same config. as the clock (all date options bellow will be ignored if enabled)
-    date_font         = "",                     -- Set date font
+    date_font         = "default",              -- Set date font
     date_fontsize     = 30,                     -- Set date font size
     date_fontbold     = true,                   -- Set date font bold
     date_fontitalic   = false,                  -- Set date font italic
@@ -51,12 +52,13 @@ local user_opts = {
     duration          = 5,                      -- Set how many seconds the clock should be displayed before auto-hiding
     showosdmsg        = true,                   -- Toggle OSD messages
     fade              = 80,                     -- Turn the clock transparent with a hotkey, set 0 to disable
-    locale            = "",                     -- Set your prefered locale, by default it uses lua's default (english)
+    locale            = "",                     -- Set your prefered locale, by default it uses Lua's default (english)
     autoenable        = "no",                   -- Set if the clock should be toggled automatically by default
     autoenable_langs  = "jpn, jp, kor, ko",     -- List languages for the clock to auto enable it
-    tempkey           = "c",                    -- Set key to toggle the clock for a brief time
-    permakey          = "C",                    -- Set key to toggle the clock permanently
-    fadekey           = ";",                    -- Set key for the fade clock feature
+    -- Keybinds
+    tempkey           = "c",                    -- Set keybind to toggle the clock for a brief time
+    permakey          = "C",                    -- Set keybind to toggle the clock permanently
+    fadekey           = ";",                    -- Set keybind for the fade clock feature
 }
 opt.read_options(user_opts, "osc-clock")
 
@@ -89,12 +91,19 @@ local function format_color(color, prefix)
 end
 
 local function set_clock_style()
+    local clock_font = nil
     local clock_bold = user_opts.clock_fontbold and 1 or 0
     local clock_italic = user_opts.clock_fontitalic and 1 or 0
 
+    if user_opts.clockfont == "default" then
+        clock_font = mp.get_property("options/font")
+    else
+        clock_font = user_opts.clock_font
+    end
+
     return string.format(
         "%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
-        string.format("{\\fn%s}", user_opts.clock_font),
+        string.format("{\\fn%s}", clock_font),
         string.format("{\\fs%d}", user_opts.clock_fontsize),
         string.format("{\\b%d}", clock_bold),
         string.format("{\\i%d}", clock_italic),
@@ -112,12 +121,19 @@ local function set_clock_style()
 end
 
 local function set_date_style()
+    local date_font = nil
     local date_bold = user_opts.date_fontbold and 1 or 0
     local date_italic = user_opts.date_fontitalic and 1 or 0
 
+    if user_opts.datefont == "default" then
+        date_font = mp.get_property("options/font")
+    else
+        date_font = user_opts.date_font
+    end
+
     return string.format(
         "%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
-        string.format("{\\fn%s}", user_opts.date_font),
+        string.format("{\\fn%s}", date_font),
         string.format("{\\fs%d}", user_opts.date_fontsize),
         string.format("{\\b%d}", date_bold),
         string.format("{\\i%d}", date_italic),
@@ -134,44 +150,80 @@ local function set_date_style()
     )
 end
 
-local function clock()
-    local systime = nil
+local function set_clock_format()
     local time = nil
-    local date = os.date(user_opts.date_format)
-    local clock_data = set_clock_style()
-    local date_data = nil
+    local systime = os.date("%I:%M")
 
-    if user_opts.date_useclockopt then
-        date_data = clock_data
-    else
-        date_data = set_date_style()
-    end
-
-    if user_opts.clock_formatsmp > 0 then
-        systime = os.date("%I:%M")
-        if systime:match("^12") then
-            if user_opts.clock_formatsmp == 2 then
-                time = systime:gsub("^(..)", "　0")
-            else
+    if user_opts.clock_advformat == "" then
+        if user_opts.clock_format == "24" then
+            time = os.date("%H:%M")
+        elseif user_opts.clock_format == "12" then
+            time = os.date("%I:%M")
+        elseif user_opts.clock_format == "24s" then
+            time = os.date("%H:%M:%S")
+        elseif user_opts.clock_format == "12s" then
+            time = os.date("%I:%M:%S")
+        elseif user_opts.clock_format == "12m" then
+            time = os.date("%I:%M%p")
+        elseif user_opts.clock_format == "12j" then
+            if systime:match("^12") then
                 time = systime:gsub("^(..)", "0")
-            end
-        elseif systime:match("^0") then
-            if user_opts.clock_formatsmp == 2 then
-                time = systime:gsub("^(0)", "　")
-            else
+            elseif systime:match("^0") then
                 time = systime:gsub("^(0)", "")
             end
-        else
-            time = systime
+        elseif user_opts.clock_format == "12jb" then
+            if systime:match("^12") then
+                time = systime:gsub("^(..)", "　0")
+            elseif systime:match("^0") then
+                time = systime:gsub("^(0)", "　")
+            end
         end
     else
-        time = os.date(user_opts.clock_format)
+        time = os.date(user_opts.clock_advformat)
     end
-    osc_clock.data = string.format("{\\an7}%s%s%s", clock_data, clock_pos, time)
+
+    return time
+end
+
+local function set_date_format()
+    local date = nil
+
+    if user_opts.date_advformat == "" then
+        if user_opts.date_format == "dmy" then
+            date = os.date("%d/%m/%Y")
+        elseif user_opts.date_format == "iso" then
+            date = os.date("%Y/%m/%d")
+        elseif user_opts.date_format == "usa" then
+            date = os.date("%m/%d/%Y")
+        elseif user_opts.date_format == "smp1" then
+            date = os.date("%d/%m")
+        elseif user_opts.date_format == "smp2" then
+            date = os.date("%m/%d")
+        end
+    else
+        date = os.date(user_opts.date_advformat)
+    end
+
+    return date
+end
+
+local function clock()
+    local clock_data = set_clock_style()
+    local clock_format = set_clock_format()
+    local date_data = nil
+    local date_format = set_date_format()
+
+    osc_clock.data = string.format("{\\an7}%s%s%s", clock_data, clock_pos, clock_format)
     osc_clock:update()
 
     if user_opts.date_enable then
-        osc_date.data = string.format("{\\an7}%s%s%s", date_data, date_pos, date)
+        if user_opts.date_useclockopt then
+            date_data = clock_data
+        else
+            date_data = set_date_style()
+        end
+
+        osc_date.data = string.format("{\\an7}%s%s%s", date_data, date_pos, date_format)
         osc_date:update()
     end
 end
