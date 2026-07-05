@@ -99,7 +99,7 @@ It's recommended to use the version available on the [release page](https://gith
     - `12m`: 12h clock format with AM/PM;
     - `12j`: Japanese 12h format (12:00 AM/PM -> 0:00);
     - `12jb`: Japanese 12h format with a blank space before one digit hour;
-- __Default:__ `12jb`
+- __Default:__ `24`
 
 #### Option: `clock_advformat`
 - Set clock time format using Lua's time notations.
@@ -293,6 +293,7 @@ clock_fontcolor=FF0000
 clock_bordersize=2
 clock_bordercolor=FFFF00
 clock_shadowdist=3
+clock_format=12j
 ```
 
 ![Screenshot3](/docs/assets/screenshot3.png)

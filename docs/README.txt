@@ -142,7 +142,7 @@
                 - 12m: 12h clock format with AM/PM;
                 - 12j: Japanese 12h format (12:00 AM/PM -> 0:00);
                 - 12jb: Japanese 12h format with a blank space before one digit hour;
-            ・Default: 12jb
+            ・Default: 24
 
         clock_advformat
             ・Set clock time format using Lua's time notations.

@@ -21,19 +21,19 @@ local user_opts = {
     clock_shadowdist  = 0,                      -- Set clock shadow distance, set 0 to disable the shadow
     clock_shadowcolor = "000000",               -- Set clock shadow color (format: RRGGBB)
     clock_shadowalpha = 0,                      -- Set clock shadow transparency
-    clock_textspacing = 4,                      -- Set clock spacing between individual characters
+    clock_textspacing = 4,                      -- Set spacing between individual characters
     clock_edgeblur    = 1,                      -- Set clock text edge blur, set 0 to disable
     clock_posx        = 32,                     -- Set clock X position on screen
     clock_posy        = 28,                     -- Set clock Y position on screen
-    clock_format      = "12jb",                 -- Set time format, will be ignored if clock_advformat is not empty
-    clock_advformat   = "",                     -- Set time format using Lua's time notations (learn more at https://www.lua.org/pil/22.1.html)
+    clock_format      = "24",                   -- Set clock time format, will be ignored if clock_advformat is not empty
+    clock_advformat   = "",                     -- Set clock time format using Lua's time notations (learn more at https://www.lua.org/pil/22.1.html)
     -- Date options
     date_enable       = false,                  -- Toggle date
-    date_posx         = 68,                     -- Set X position of the date on screen
-    date_posy         = 72,                     -- Set Y position of the date on screen
+    date_posx         = 68,                     -- Set date X position of the date on screen
+    date_posy         = 72,                     -- Set date Y position of the date on screen
     date_format       = "smp2",                 -- Set date format, will be ignored if date_advformat is not empty
     date_advformat    = "",                     -- Set date format using Lua's date notations (learn more at https://www.lua.org/pil/22.1.html)
-    date_useclockopt  = false,                  -- Use the same config. as the clock (all date options bellow will be ignored if enabled)
+    date_useclockopt  = false,                  -- Use the same config. as the clock for the date (all date options bellow will be ignored if enabled)
     date_font         = "default",              -- Set date font
     date_fontsize     = 30,                     -- Set date font size
     date_fontbold     = true,                   -- Set date font bold
@@ -46,19 +46,19 @@ local user_opts = {
     date_shadowdist   = 0,                      -- Set date shadow distance, set 0 to disable the shadow
     date_shadowcolor  = "000000",               -- Set date shadow color (format: RRGGBB)
     date_shadowalpha  = 0,                      -- Set date shadow transparency
-    date_textspacing  = 4,                      -- Set date spacing between individual characters
+    date_textspacing  = 4,                      -- Set spacing between individual characters
     date_edgeblur     = 1,                      -- Set date text edge blur, set 0 to disable
     -- General options
     duration          = 5,                      -- Set how many seconds the clock should be displayed before auto-hiding
     showosdmsg        = true,                   -- Toggle OSD messages
-    fade              = 80,                     -- Turn the clock transparent with a hotkey, set 0 to disable
-    locale            = "",                     -- Set your prefered locale, by default it uses Lua's default (english)
+    fade              = 80,                     -- Turn the clock transparent with a keybind, set 0 to disable
+    locale            = "",                     -- Set your prefered locale, by default it uses Lua's default (English)
     autoenable        = "no",                   -- Set if the clock should be toggled automatically by default
     autoenable_langs  = "jpn, jp, kor, ko",     -- List languages for the clock to auto enable it
     -- Keybinds
     tempkey           = "c",                    -- Set keybind to toggle the clock for a brief time
     permakey          = "C",                    -- Set keybind to toggle the clock permanently
-    fadekey           = ";",                    -- Set keybind for the fade clock feature
+    fadekey           = ";",                    -- Set keybind to make the clock translucid
 }
 opt.read_options(user_opts, "osc-clock")
 
