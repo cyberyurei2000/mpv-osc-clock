@@ -2,7 +2,7 @@
     mpv-osc-clock
     Copyright (c) cyberyurei2000 2024-2026
 
-    README                         ver 3.02
+    README                         ver 4.00
 -----------------------------------------------
 
 ■ Table of content
@@ -58,224 +58,248 @@
 
     ◎Clock options
         clock_font
-            ・Set font name
-            ・Default: FO-TVASAHI-GMorning
+            ・Set the clock font.
+            ・If set to default, the font from mpv osd will be used.
+            ・Default: default
 
         clock_fontsize
-            ・Set font size
+            ・Set the clock font size.
             ・Default: 48
 
         clock_fontbold
-            ・Set font bold
+            ・Set the clock font bold.
             ・Default: no
 
         clock_fontitalic
-            ・Set font italic
+            ・Set the clock font italic.
             ・Default: no
 
         clock_fontcolor
-            ・Set font color
+            ・Set the clock font color.
+            ・Uses the RRGGBB format.
             ・Default: FFFFFF
-            ・Uses the RRGGBB format
 
         clock_fontalpha
-            ・Set font transparency
+            ・Set the clock font alpha transparency.
+            ・Available values: 0 (Full opaque) - 255 (Full transparent)
             ・Default: 0
-            ・Available options: 0 - 255
 
         clock_bordersize
-            ・Set border size
+            ・Set the clock border size.
+            ・Set 0 to disable the border
             ・Default: 4
-            ・Set it 0 to disable the border
 
         clock_bordercolor
-            ・Set border color
+            ・Set the clock border color.
+            ・Uses the RRGGBB color format.
             ・Default: 000000
-            ・Uses the RRGGBB format
 
         clock_borderalpha
-            ・Set border transparency
+            ・Set the clock border alpha transparency.
+            ・Available values: 0 (Full opaque) - 255 (Full transparent)
             ・Default: 0
-            ・Available values: 0 - 255
 
         clock_shadowdist
-            ・Set shadow distance
+            ・Set the clock shadow distance.
+            ・Set 0 to disable the shadow
             ・Default: 0
-            ・Set it 0 to disable the shadow
 
         clock_shadowcolor
-            ・Set shadow color
-            ・Default: 000000
+            ・Set the clock shadow color.
             ・Uses the RRGGBB format
+            ・Default: 000000
 
         clock_shadowalpha
-            ・Set shadow transparency
+            ・Set the clock shadow alpha transparency.
+            ・Available values: 0 (Full opaque) - 255 (Full transparent)
             ・Default: 0
-            ・Available values: 0 - 255
 
         clock_textspacing
-            ・Set spacing between individual characters
+            ・Set spacing between individual characters.
             ・Default: 4
 
         clock_edgeblur
-            ・Set text edge blur
+            ・Set clock text edge blur.
+            ・Set 0 to disable the edge blur.
             ・Default: 1
-            ・Set it 0 to disable it
 
         clock_posx
-            ・Set X position on screen
+            ・Set clock X position on the screen.
             ・Default: 32
 
         clock_posy
-            ・Set Y position on screen
+            ・Set clock Y position on the screen.
             ・Default: 28
 
         clock_format
-            ・Set time format
-            ・Default: %H:%M
-            ・Learn more at https://www.lua.org/pil/22.1.html
-            ・Will be ignored if "clock_formatsmp" is set
-
-        clock_formatsmp
-            ・Toggle between a simplified 12h format
-            ・Default: 2
+            ・Set clock time format.
+            ・Will be ignored if clock_advformat is not empty.
             ・Available options:
-                - 0: Disable
-                - 1: No blank space
-                - 2: Add blank space
+                - 24: 24h clock format;
+                - 12: 12h clock format;
+                - 24s: 24h clock format with seconds;
+                - 12s: 12h clock format with seconds;
+                - 12m: 12h clock format with AM/PM;
+                - 12j: Japanese 12h format (12:00 AM/PM -> 0:00);
+                - 12jb: Japanese 12h format with a blank space before one digit hour;
+            ・Default: 12jb
+
+        clock_advformat
+            ・Set clock time format using Lua's time notations.
+            ・If not empty, this option will overwrite the clock_format option.
+            ・Check Lua's documentation to learn more: https://www.lua.org/pil/22.1.html
+            ・Default:
 
     ◎Date options
         date_enable
-            ・Toggle date
+            ・Display the date in the clock.
             ・Default: no
 
         date_posx
-            ・Set X position on screen
-            ・Default: 82
+            ・Set date X position on the screen.
+            ・Default: 68
 
         date_posy
-            ・Set Y position on screen
-            ・Deault: 88
+            ・Set date Y position on the screen.
+            ・Default: 72
 
         date_format
-            ・Set date format
-            ・Default: %Y/%m/%d
-            ・Learn more at https://www.lua.org/pil/22.1.html
+            ・Set date format.
+            ・Will be ignored if date_advformat is not empty.
+            ・Available options:
+             - dmy: DD/MM/YYYY date format;
+             - iso: YYYY/MM/DD date format;
+             - usa: MM/DD/YYYY date format;
+             - smp1: DD/MM date format;
+             - smp2: MM/DD date format;
+            ・Default: smp2
 
-        date_useclockopt
-            ・Use the same configuration as the clock
-            ・Default: no
-            ・All date options bellow will be ignored if enabled
-
-        date_font
-            ・Set font name
+        date_advformat
+            ・Set date format using Lua's date notations.
+            ・If not empty, this option will overwrite the date_format option.
+            ・Check Lua's documentation to learn more: https://www.lua.org/pil/22.1.html
             ・Default:
 
+        date_useclockopt
+            ・Use the same configuration as the clock for the date.
+            ・All date options bellow will be ignored if enabled.
+            ・Default: no
+
+        date_font
+            ・Set the date font.
+            ・If set to default, the font from mpv osd will be used.
+            ・Default: default
+
         date_fontsize
-            ・Set font size
+            ・Set the date font size.
             ・Default: 30
 
         date_fontbold
-            ・Set font bold
+            ・Set the date font bold.
             ・Default: yes
 
         date_fontitalic
-            ・Set font italic
+            ・Set the date font italic.
             ・Default: no
 
         date_fontcolor
-            ・Set font color
+            ・Set the date font color.
+            ・Uses the RRGGBB format.
             ・Default: FFFFFF
-            ・Uses the RRGGBB format
 
         date_fontalpha
-            ・Set font transparency
+            ・Set the date font alpha transparency.
+            ・Available values: 0 (Full opaque) - 255 (Full transparent).
             ・Default: 0
-            ・Available options: 0 - 255
 
         date_bordersize
-            ・Set border size
-            ・Default: 1
-            ・Set it 0 to disable the border
+            ・Set the date border size.
+            ・Set 0 to disable the border.
+            ・Default: 2
 
         date_bordercolor
-            ・Set border color
+            ・Set the date border color.
+            ・Uses the RRGGBB color format.
             ・Default: 000000
-            ・Uses the RRGGBB format
 
         date_borderalpha
-            ・Set border transparency
+            ・Set the date border alpha transparency.
+            ・Available values: 0 (Full opaque) - 255 (Full transparent).
             ・Default: 0
-            ・Available values: 0 - 255
 
         date_shadowdist
-            ・Set shadow distance
+            ・Set the date shadow distance.
+            ・Set 0 to disable the shadow.
             ・Default: 0
-            ・Set it 0 to disable the shadow
 
         date_shadowcolor
-            ・Set shadow color
+            ・Set the date shadow color.
+            ・Uses the RRGGBB color format.
             ・Default: 000000
-            ・Uses the RRGGBB format
 
         date_shadowalpha
-            ・Set shadow transparency
+            ・Set the date shadow alpha transparency.
+            ・Available values: 0 (Full opaque) - 255 (Full transparent).
             ・Default: 0
-            ・Available values: 0 - 255
 
         date_textspacing
-            ・Set spacing between individual characters
+            ・Set spacing between individual characters.
             ・Default: 4
 
         date_edgeblur
-            ・Set text edge blur
+            ・Set date text edge blur.
+            ・Set 0 to disable the edge blur.
             ・Default: 1
-            ・Set it 0 to disable it
 
     ◎General options
         duration
-            ・Set how many seconds the clock should be displayed before auto-hiding
+            ・Set how many seconds the clock should be displayed before auto-hiding.
             ・Default: 5
 
         showosdmsg
-            ・Toggle OSD messages
+            ・Toggle OSD messages.
             ・Default: yes
 
         fade
-            ・Turn the clock transparent with a hotkey
+            ・Turn the clock transparent with a keybind.
+            ・Set 0 to disable it.
+            ・Available values: 0 (Full opaque) - 255 (Full transparent).
             ・Default: 80
-            ・Set 0 to disable it. Available values: 0 - 255
 
         locale
-            ・Set your prefered locale
+            ・Set your prefered locale.
+            ・By default it uses Lua's default locale (English).
+            ・Uses language tags, ex.:
+                - en-GB (Windows) / en_GB.UTF-8 (Linux) for British English;
+                - zh-CN (Windows) / zh_CN.UTF-8 (Linux) for Simplified Chinese;
             ・Default:
-            ・By default it uses lua's default (english)
-            ・Uses language tags, ex.: "en_GB.UTF8" for British English or "zh_CN.UTF8" for Simplified Chinese
 
         autoenable
-            ・Set if the clock should be toggled automatically by default
+            ・Set if the clock should be toggled automatically by default.
             ・Default: no
             ・Available options:
                 - no: Disable
                 - yes: Enable
                 - onlyfs: Enable only in fullscreen
                 - bylang: Enable via an audio track language specified by the user (only works if the audio track has a language metadata)
+            ・Default: no
 
         autoenable_langs
-            ・List languages for the clock to autoenable it
+            ・Set if the clock should be toggled automatically by default.
+            ・Only works if autoenable option is set to bylang.
             ・Default: jpn, jp, kor, ko
-            ・Only works if "autoenable" is set to "bylang"
 
+    ◎Keybinds
         tempkey
-            ・Set key to toggle the clock for a brief time
+            ・Set keybind to toggle the clock for a brief time.
             ・Default: c
 
         permakey
-            ・Set key to toggle the clock permanently
+            ・Set keybind to toggle the clock permanently.
             ・Default: C
 
         fadekey
-            ・Set key for the fade clock feature
+            ・Set keybind to make the clock translucid.
             ・Default: ;
 
 
@@ -291,6 +315,10 @@
 
 
 ■ 6. Changelog
+    2026/07/XX ver 4.00
+        Features:
+            ・TODO
+
     2026/05/25 ver 3.02
         Bugfixes:
             ・Small fixes for the "showosdmsg" option

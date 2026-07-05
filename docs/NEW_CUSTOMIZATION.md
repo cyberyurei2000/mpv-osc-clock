@@ -15,60 +15,60 @@ It's recommended to use the version available on the [release page](https://gith
 ### Clock options
 
 #### Option: `clock_font`
-- Set the clock's font.
-- If set to `default`, mpv's osd font will be used.
+- Set the clock font.
+- If set to `default`, the font from mpv osd will be used.
 - __Default:__ `default`
 
 #### Option: `clock_fontsize`
-- Set the clock's font size.
+- Set the clock font size.
 - __Default:__ `48`
 
 #### Option: `clock_fontbold`
-- Set the clock's font bold.
+- Set the clock font bold.
 - __Default:__ `yes`
 
 #### Option: `clock_fontitalic`
-- Set the clock's font italic.
+- Set the clock font italic.
 - __Default:__ `no`
 
 #### Option: `clock_fontcolor`
-- Set the clock's font color.
+- Set the clock font color.
 - Uses the `RRGGBB` color format.
 - __Default:__ `FFFFFF`
 
 #### Option: `clock_fontalpha`
-- Set the clock's font alpha transparency.
-- Available values: `0` (Full opaque) - `255` (Full transparent)
+- Set the clock font alpha transparency.
+- Available values: `0` (Full opaque) - `255` (Full transparent).
 - __Default:__ `0`
 
 #### Option: `clock_bordersize`
-- Set the clock's border size.
-- Set `0` to disable the border
+- Set the clock border size.
+- Set `0` to disable the border.
 - __Default:__ `2`
 
 #### Option: `clock_bordercolor`
-- Set the clock's border color.
+- Set the clock border color.
 - Uses the `RRGGBB` color format.
 - __Default:__ `000000`
 
 #### Option: `clock_borderalpha`
-- Set the clock's border alpha transparency.
-- Available values: `0` (Full opaque) - `255` (Full transparent)
+- Set the clock border alpha transparency.
+- Available values: `0` (Full opaque) - `255` (Full transparent).
 - __Default:__ `0`
 
 #### Option: `clock_shadowdist`
-- Set the clock's shadow distance.
-- Set `0` to disable the shadow
+- Set the clock shadow distance.
+- Set `0` to disable the shadow.
 - __Default:__ `0`
 
 #### Option: `clock_shadowcolor`
-- Set the clock's shadow color.
+- Set the clock shadow color.
 - Uses the `RRGGBB` color format.
 - __Default:__ `000000`
 
 #### Option: `clock_shadowalpha`
-- Set the clock's shadow alpha transparency.
-- Available values: `0` (Full opaque) - `255` (Full transparent)
+- Set the clock shadow alpha transparency.
+- Available values: `0` (Full opaque) - `255` (Full transparent).
 - __Default:__ `0`
 
 #### Option: `clock_textspacing`
@@ -76,20 +76,20 @@ It's recommended to use the version available on the [release page](https://gith
 - __Default:__ `4`
 
 #### Option: `clock_edgeblur`
-- Set clock's text edge blur.
+- Set clock text edge blur.
 - Set `0` to disable the edge blur.
 - __Default:__ `1`
 
 #### Option: `clock_posx`
-- Set clock's X position on the screen.
+- Set clock X position on the screen.
 - __Default:__ `32`
 
 #### Option: `clock_posy`
-- Set clock's Y position on the screen.
+- Set clock Y position on the screen.
 - __Default:__ `28`
 
 #### Option: `clock_format`
-- Set clock's time format.
+- Set clock time format.
 - Will be ignored if `clock_advformat` is not empty.
 - Available options:
     - `24`: 24h clock format;
@@ -102,7 +102,7 @@ It's recommended to use the version available on the [release page](https://gith
 - __Default:__ `12jb`
 
 #### Option: `clock_advformat`
-- Set clock's time format using Lua's time notations.
+- Set clock time format using Lua's time notations.
 - If not empty, this option will overwrite the `clock_format` option.
 - Check [Lua's documentation](https://www.lua.org/pil/22.1.html) to lean more.
 - __Default:__ `　`
@@ -110,15 +110,15 @@ It's recommended to use the version available on the [release page](https://gith
 ### Date options
 
 #### Option: `date_enable`
-- Display the date in the clock
+- Display the date in the clock.
 - __Default:__ `no`
 
 #### Option: `date_posx`
-- Set date's X position on the screen.
+- Set date X position on the screen.
 - __Default:__ `68`
 
 #### Option: `date_posy`
-- Set date's Y position on the screen.
+- Set date Y position on the screen.
 - __Default:__ `72`
 
 #### Option: `date_format`
@@ -144,60 +144,60 @@ It's recommended to use the version available on the [release page](https://gith
 - __Default:__ `no`
 
 #### Option: `date_font`
-- Set the date's font.
+- Set the date font.
 - If set to `default`, mpv's osd font will be used.
 - __Default:__ `default`
 
 #### Option: `date_fontsize`
-- Set the date's font size.
+- Set the date font size.
 - __Default:__ `30`
 
 #### Option: `date_fontbold`
-- Set the date's font bold.
+- Set the date font bold.
 - __Default:__ `yes`
 
 #### Option: `date_fontitalic`
-- Set the date's font italic.
+- Set the date font italic.
 - __Default:__ `no`
 
 #### Option: `date_fontcolor`
-- Set the date's font color.
+- Set the date font color.
 - Uses the `RRGGBB` color format.
 - __Default:__ `FFFFFF`
 
 #### Option: `date_fontalpha`
-- Set the date's font alpha transparency.
-- Available values: `0` (Full opaque) - `255` (Full transparent)
+- Set the date font alpha transparency.
+- Available values: `0` (Full opaque) - `255` (Full transparent).
 - __Default:__ `0`
 
 #### Option: `date_bordersize`
-- Set the date's border size.
-- Set `0` to disable the border
+- Set the date border size.
+- Set `0` to disable the border.
 - __Default:__ `1`
 
 #### Option: `date_bordercolor`
-- Set the clock's border color.
+- Set the clock border color.
 - Uses the `RRGGBB` color format.
 - __Default:__ `000000`
 
 #### Option: `date_borderalpha`
-- Set the date's border alpha transparency.
-- Available values: `0` (Full opaque) - `255` (Full transparent)
+- Set the date border alpha transparency.
+- Available values: `0` (Full opaque) - `255` (Full transparent).
 - __Default:__ `0`
 
 #### Option: `date_shadowdist`
-- Set the date's shadow distance.
-- Set `0` to disable the shadow
+- Set the date shadow distance.
+- Set `0` to disable the shadow.
 - __Default:__ `0`
 
 #### Option: `date_shadowcolor`
-- Set the date's shadow color.
+- Set the date shadow color.
 - Uses the `RRGGBB` color format.
 - __Default:__ `000000`
 
 #### Option: `date_shadowalpha`
-- Set the date's shadow alpha transparency.
-- Available values: `0` (Full opaque) - `255` (Full transparent)
+- Set the date shadow alpha transparency.
+- Available values: `0` (Full opaque) - `255` (Full transparent).
 - __Default:__ `0`
 
 #### Option: `date_textspacing`
@@ -205,7 +205,7 @@ It's recommended to use the version available on the [release page](https://gith
 - __Default:__ `4`
 
 #### Option: `date_edgeblur`
-- Set date's text edge blur.
+- Set date text edge blur.
 - Set `0` to disable the edge blur.
 - __Default:__ `1`
 
@@ -221,11 +221,13 @@ It's recommended to use the version available on the [release page](https://gith
 
 #### Option: `fade`
 - Turn the clock transparent with a keybind.
+- Set `0` to disable it.
+- Available values: `0` (Full opaque) - `255` (Full transparent).
 - __Default:__ `80`
 
 #### Option: `locale`
 - Set your prefered locale.
-- By default it uses Lua's default (English).
+- By default it uses Lua's default locale (English).
 - Uses language tags, ex.:
     - `en-GB` (Windows) / `en_GB.UTF-8` (Linux) for British English;
     - `zh-CN` (Windows) / `zh_CN.UTF-8` (Linux) for Simplified Chinese;
@@ -252,15 +254,15 @@ It's recommended to use the version available on the [release page](https://gith
 - __Default:__ `c`
 
 #### Option: `permakey`
-- Set keybing to toggle the clock permanently.
+- Set keybind to toggle the clock permanently.
 - __Default:__ `C`
 
 #### Option: `fadekey`
-- Set keybing to make the clock translucid.
+- Set keybind to make the clock translucid.
 - Only works if the `fade` option is not set to `0`.
 - __Default:__ `;`
 
-## Examples (TODO)
+## Examples
 
 Here some examples of possible customizations that can be done:
 
@@ -278,8 +280,7 @@ clock_textspacing=0
 clock_edgeblur=0
 clock_posx=70
 clock_posy=30
-clock_format=%H:%M:%S
-clock_formatsmp=0
+clock_format=24s
 ```
 
 ![Screenshot2](/docs/assets/screenshot2.png)
@@ -297,16 +298,10 @@ clock_shadowdist=3
 ![Screenshot3](/docs/assets/screenshot3.png)
 
 ```ini
-clock_font=FO-NHKTIMER-2021
-clock_bordersize=2
-clock_borderalpha=10
-clock_shadowdist=0.5
-clock_shadowalpha=50
-clock_textspacing=4
-clock_edgeblur=2
-clock_posx=44
-clock_posy=25
-clock_formatsmp=2
+clock_font=FO-TVASAHI-GMorning
+clock_fontbold=false
+clock_bordersize=4
+clock_format=12jb
 ```
 
 ![Screenshot4](/docs/assets/screenshot4.png)
@@ -321,11 +316,11 @@ clock_textspacing=0
 clock_edgeblur=0
 clock_posx=52
 clock_posy=60
-clock_formatsmp=1
+clock_format=12j
 date_enable=yes
 date_posx=50
 date_posy=26
-date_format=%d (%a)
+date_advformat=%d (%a)
 date_useclockopt=yes
 locale=ko_KR.UTF-8
 ```
