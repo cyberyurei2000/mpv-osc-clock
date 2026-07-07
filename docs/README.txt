@@ -27,7 +27,7 @@
 
 ■ 3. Setup
     1. Place the file "osc-clock.lua" inside your mpv scripts directory.
-    2. Place "FO-TVASAHI-GMorning.otf" (or any font of your choosing) inside your mpv fonts directory.
+    2. If you want to use one of the fonts from "TV-TIMER-FONT-V1.zip", place the font inside your mpv fonts directory.
 
     ----------------------------------------------------------------------------
     Windows:   C:\Users\%username%\AppData\Roaming\mpv\
@@ -37,7 +37,6 @@
     ◎Folder structure
         mpv/
         ├── fonts/
-        │   └── FO-TVASAHI-GMorning.otf
         ├── script-opts/
         │   └── osc-clock.conf
         └── scripts/
