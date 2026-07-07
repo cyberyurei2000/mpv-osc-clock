@@ -303,8 +303,7 @@
 
 
 ■ 5. Credits
-    The font "FO-TVASAHI-GMorning.otf" and the other fonts found in
-  "TV-TIMER-FONT-V1.zip" was made by @tvoped on Twitter
+    The font pack "TV-TIMER-FONT-V1.zip" was made by the user @tvoped on Twitter
 
     ----------------------------------------------------------------------------
     ◎Twitter archive link: https://web.archive.org/web/20220320123906/https://twitter.com/tvoped/status/1466992257962487811
