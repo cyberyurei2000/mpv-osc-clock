@@ -13,7 +13,7 @@ To toggle it permanently, press the `C` key.
 ## Setup
 
 * Place the file `osc-clock.lua` inside your mpv `scripts` directory.
-* Place `FO-TVASAHI-GMorning.otf` (or any font of your choosing) inside your mpv `fonts` directory.
+* If you want to use one of the fonts from `TV-TIMER-FONT-V1.zip`, place the font inside your mpv `fonts` directory.
 
 ```
 • Windows:    C:\Users\%username%\AppData\Roaming\mpv\
@@ -25,7 +25,6 @@ To toggle it permanently, press the `C` key.
 ```
 mpv/
 ├── fonts/
-│   └── FO-TVASAHI-GMorning.otf
 ├── script-opts/
 │   └── osc-clock.conf
 └── scripts/
@@ -40,7 +39,7 @@ You can customize any aspect of the clock. For more information, check [Clock Cu
 
 ## Credits
 
-The font `FO-TVASAHI-GMorning.otf` and the other fonts found in `TV-TIMER-FONT-V1.zip` in the releases page was made by user [@tvoped](https://web.archive.org/web/20220320123906/https://twitter.com/tvoped/status/1466992257962487811) on Twitter.
+The font pack `TV-TIMER-FONT-V1.zip` in the releases page was made by the user [@tvoped](https://web.archive.org/web/20220320123906/https://twitter.com/tvoped/status/1466992257962487811) on Twitter.
 
 You can get the fonts in the releases page or from the original [source (dead)](https://www.dropbox.com/scl/fi/3lir00hds4o3xqr6hdwea/TV-TIMER-FONT-V1.zip?rlkey=xgnqhdotec8a9kf25nck7azg7&e=1&dl=0).
 

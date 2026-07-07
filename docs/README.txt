@@ -315,9 +315,12 @@
 
 
 ■ 6. Changelog
-    2026/07/XX ver 4.00
+    2026/07/06 ver 4.00
         Features:
-            ・TODO
+            ・A new default look of the clock to make it less distracting, using the mpv osd font and is set to use a 24h time format
+            ・The old "clock_formatsmp" is now "clock_format" and has a various options to set a time format easily with a more clear documentation, is the same for setting the date format with the "date_format" option (you can still set the time and date format manually using the "clock_advformat" and "date_advformat")
+            ・"clock_font" and "date_font" now has a new option called "default", if set, it will use the mpv osd font
+            ・The customization documentation was rewritten to make it much more clear to read and to know about the various options of this plugin
 
     2026/05/25 ver 3.02
         Bugfixes:

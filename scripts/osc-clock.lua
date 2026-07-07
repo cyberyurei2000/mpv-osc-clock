@@ -165,6 +165,8 @@ local function set_clock_format()
             time = os.date("%I:%M:%S")
         elseif user_opts.clock_format == "12m" then
             time = os.date("%I:%M%p")
+        elseif user_opts.clock_format == "full" then
+            time = os.date("%X")
         elseif user_opts.clock_format == "12j" then
             if systime:match("^12") then
                 time = systime:gsub("^(..)", "0")
@@ -199,6 +201,8 @@ local function set_date_format()
             date = os.date("%d/%m")
         elseif user_opts.date_format == "smp2" then
             date = os.date("%m/%d")
+        elseif user_opts.date_format = "full" then
+            date os.date("%x")
         end
     else
         date = os.date(user_opts.date_advformat)
