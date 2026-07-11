@@ -201,8 +201,8 @@ local function set_date_format()
             date = os.date("%d/%m")
         elseif user_opts.date_format == "smp2" then
             date = os.date("%m/%d")
-        elseif user_opts.date_format = "full" then
-            date os.date("%x")
+        elseif user_opts.date_format == "full" then
+            date = os.date("%x")
         end
     else
         date = os.date(user_opts.date_advformat)

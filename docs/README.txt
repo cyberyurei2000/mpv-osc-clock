@@ -2,7 +2,7 @@
     mpv-osc-clock
     Copyright (c) cyberyurei2000 2024-2026
 
-    README                         ver 4.00
+    README                         ver 4.01
 -----------------------------------------------
 
 ■ Table of content
@@ -313,6 +313,10 @@
 
 
 ■ 6. Changelog
+    2026/07/06 ver 4.01
+        Bugfixes:
+            ・Fix a small issue which the plugin was unable to be loaded
+
     2026/07/06 ver 4.00
         Features:
             ・A new default look of the clock to make it less distracting, using the mpv osd font and is set to use a 24h time format
