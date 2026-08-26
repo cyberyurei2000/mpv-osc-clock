@@ -172,12 +172,16 @@ local function set_clock_format()
                 time = systime:gsub("^(..)", "0")
             elseif systime:match("^0") then
                 time = systime:gsub("^(0)", "")
+            else
+                time = systime
             end
         elseif user_opts.clock_format == "12jb" then
             if systime:match("^12") then
                 time = systime:gsub("^(..)", "　0")
             elseif systime:match("^0") then
                 time = systime:gsub("^(0)", "　")
+            else
+                time = systime
             end
         end
     else

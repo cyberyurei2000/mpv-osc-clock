@@ -2,16 +2,16 @@
     mpv-osc-clock
     Copyright (c) cyberyurei2000 2024-2026
 
-    README                         ver 4.01
+    README                         ver 4.02
 -----------------------------------------------
 
 ■ Table of content
-  ■ About
-  ■ How to use?
-  ■ Setup
-  ■ Customization
-  ■ Credits
-  ■ Changelog
+    ■ About
+    ■ How to use?
+    ■ Setup
+    ■ Customization
+    ■ Credits
+    ■ Changelog
 
 
 ■ 1. About
@@ -313,9 +313,13 @@
 
 
 ■ 6. Changelog
+    2026/08/26 ver 4.02
+        Bugfixes:
+            ・Fix a bug in Windows which causes the clock to display as "nil" at specific times with "clock_format" set to "12j" or "12jb".
+
     2026/07/06 ver 4.01
         Bugfixes:
-            ・Fix a small issue which the plugin was unable to be loaded
+            ・Fix a small issue that prevented the plugin from loading
 
     2026/07/06 ver 4.00
         Features:

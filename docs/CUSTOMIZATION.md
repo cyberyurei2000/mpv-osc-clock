@@ -300,7 +300,7 @@ clock_format=12j
 
 ```ini
 clock_font=FO-TVASAHI-GMorning
-clock_fontbold=false
+clock_fontbold=yes
 clock_bordersize=4
 clock_format=12jb
 ```
