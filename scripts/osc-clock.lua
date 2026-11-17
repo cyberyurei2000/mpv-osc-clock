@@ -88,7 +88,7 @@ local current_alpha = {
     dateshadow = user_opts.date_shadowalpha
 }
 local clock_pos = string.format("{\\pos(%d,%d)}", user_opts.clock_posx, user_opts.clock_posy)
-local date_pos = string.format("{\\pos(%d, %d)}", user_opts.date_posx, user_opts.date_posy)
+local date_pos = string.format("{\\pos(%d,%d)}", user_opts.date_posx, user_opts.date_posy)
 
 local function format_color(color, prefix)
     local r = color:sub(1, 2)
@@ -109,6 +109,10 @@ local function build_style(
         alpha, border, format_color(bordercolor, "3"), borderalpha, shad,
         format_color(shadcolor, "4"), shadalpha, spacing, blur
     )
+end
+
+local function clamp_alpha(value)
+    return math.max(0, math.min(255, value))
 end
 
 local function set_clock_locale()
@@ -201,10 +205,6 @@ local function set_date_format()
     end
 end
 
-local function get_update_interval()
-    return (user_opts.clock_format:match("s") or user_opts.clock_advformat:match("%%S")) and 1 or 5
-end
-
 local function check_audiolang()
     local track_list = mp.get_property_native("track-list")
     local lang_list = {}
@@ -213,7 +213,7 @@ local function check_audiolang()
         lang_list[string.lower(lang:gsub("%s+", ""))] = true
     end
 
-    for _, track in ipairs(track_list) do
+    for _, track in ipairs(track_list or {}) do
         if track.type == "audio" and track.lang then
             local track_lang = string.lower(track.lang:gsub("%s+", ""))
             if lang_list[track_lang] then
@@ -241,7 +241,7 @@ local function start_clock()
         timer:stop()
     end
 
-    timer = mp.add_periodic_timer(get_update_interval(), clock)
+    timer = mp.add_periodic_timer(1, clock)
     is_shown = true
 end
 
@@ -315,7 +315,7 @@ local function update_alpha()
     if is_shown then
         if not is_fade then
             for key, value in pairs(current_alpha) do
-                current_alpha[key] = value + user_opts.fade
+                current_alpha[key] = clamp_alpha(value + user_opts.fade)
             end
 
             is_fade = true
@@ -324,7 +324,7 @@ local function update_alpha()
             end
         else
             for key, value in pairs(current_alpha) do
-                current_alpha[key] = value - user_opts.fade
+                current_alpha[key] = clamp_alpha(value - user_opts.fade)
             end
 
             is_fade = false
