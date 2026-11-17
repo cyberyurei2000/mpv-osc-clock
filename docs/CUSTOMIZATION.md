@@ -293,7 +293,7 @@ clock_fontcolor=FF0000
 clock_bordersize=2
 clock_bordercolor=FFFF00
 clock_shadowdist=3
-clock_format=12j
+clock_format=12jb
 ```
 
 ![Screenshot3](/docs/assets/screenshot3.png)

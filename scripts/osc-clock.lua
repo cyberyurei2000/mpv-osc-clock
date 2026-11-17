@@ -14,13 +14,13 @@ local user_opts = {
     clock_fontbold    = true,                   -- Set clock font bold
     clock_fontitalic  = false,                  -- Set clock font italic
     clock_fontcolor   = "FFFFFF",               -- Set clock font color (format: RRGGBB)
-    clock_fontalpha   = 0,                      -- Set clock font transparency
+    clock_fontalpha   = 0,                      -- Set clock font transparency (0 = full opaque, 255 = full transparent)
     clock_bordersize  = 2,                      -- Set clock border size, set 0 to disable the border
     clock_bordercolor = "000000",               -- Set clock border color (format: RRGGBB)
-    clock_borderalpha = 0,                      -- Set clock border transparency
+    clock_borderalpha = 0,                      -- Set clock border transparency (0 = full opaque, 255 = full transparent)
     clock_shadowdist  = 0,                      -- Set clock shadow distance, set 0 to disable the shadow
     clock_shadowcolor = "000000",               -- Set clock shadow color (format: RRGGBB)
-    clock_shadowalpha = 0,                      -- Set clock shadow transparency
+    clock_shadowalpha = 0,                      -- Set clock shadow transparency (0 = full opaque, 255 = full transparent)
     clock_textspacing = 4,                      -- Set spacing between individual characters
     clock_edgeblur    = 1,                      -- Set clock text edge blur, set 0 to disable
     clock_posx        = 32,                     -- Set clock X position on screen
@@ -39,19 +39,19 @@ local user_opts = {
     date_fontbold     = true,                   -- Set date font bold
     date_fontitalic   = false,                  -- Set date font italic
     date_fontcolor    = "FFFFFF",               -- Set date font color (format: RRGGBB)
-    date_fontalpha    = 0,                      -- Set date font transparency
+    date_fontalpha    = 0,                      -- Set date font transparency (0 = full opaque, 255 = full transparent)
     date_bordersize   = 1,                      -- Set date border size, set 0 to disable the border
     date_bordercolor  = "000000",               -- Set date border color (format: RRGGBB)
-    date_borderalpha  = 0,                      -- Set date border transparency
+    date_borderalpha  = 0,                      -- Set date border transparency (0 = full opaque, 255 = full transparent)
     date_shadowdist   = 0,                      -- Set date shadow distance, set 0 to disable the shadow
     date_shadowcolor  = "000000",               -- Set date shadow color (format: RRGGBB)
-    date_shadowalpha  = 0,                      -- Set date shadow transparency
+    date_shadowalpha  = 0,                      -- Set date shadow transparency (0 = full opaque, 255 = full transparent)
     date_textspacing  = 4,                      -- Set spacing between individual characters
     date_edgeblur     = 1,                      -- Set date text edge blur, set 0 to disable
     -- General options
     duration          = 5,                      -- Set how many seconds the clock should be displayed before auto-hiding
     showosdmsg        = true,                   -- Toggle OSD messages
-    fade              = 80,                     -- Turn the clock transparent with a keybind, set 0 to disable
+    fade              = 80,                     -- Turn the clock transparent with a keybind, set 0 to disable (0 = full opaque, 255 = full transparent)
     locale            = "",                     -- Set your prefered locale, by default it uses Lua's default (English)
     autoenable        = "no",                   -- Set if the clock should be toggled automatically by default
     autoenable_langs  = "jpn, jp, kor, ko",     -- List languages for the clock to auto enable it
@@ -66,11 +66,19 @@ local osc_clock = mp.create_osd_overlay("ass-events")
 local osc_date = mp.create_osd_overlay("ass-events")
 local timer = nil
 local hide_timer = nil
+
 local is_shown = false
 local is_permanent = false
 local is_fade = false
+local error_flags = {
+    clk_locale_err = false,
+    clk_format_err = false,
+    dte_format_err = false,
+}
 local show_msg = user_opts.showosdmsg
 
+local clock_style = nil
+local date_style = nil
 local current_alpha = {
     clockfont = user_opts.clock_fontalpha,
     clockborder = user_opts.clock_borderalpha,
@@ -82,226 +90,119 @@ local current_alpha = {
 local clock_pos = string.format("{\\pos(%d,%d)}", user_opts.clock_posx, user_opts.clock_posy)
 local date_pos = string.format("{\\pos(%d, %d)}", user_opts.date_posx, user_opts.date_posy)
 
-if user_opts.locale ~= "" then
-    os.setlocale(user_opts.locale)
+local function format_color(color, prefix)
+    local r = color:sub(1, 2)
+    local g = color:sub(3, 4)
+    local b = color:sub(5, 6)
+    return string.format("{\\%sc&H%s%s%s&}", prefix, b, g, r)
 end
 
-local function format_color(color, prefix)
-    return string.format("{\\%sc&H%s&}", prefix, string.reverse(color))
+local function build_style(
+    font, size, bold, italic, color, alpha, border,
+    bordercolor, borderalpha, shad, shadcolor, shadalpha, spacing, blur
+)
+    local _font = (font == "default") and (mp.get_property("font") or "sans-serif") or font
+
+    return string.format(
+        "{\\fn%s}{\\fs%d}{\\b%d}{\\i%d}%s{\\alpha&H%02X&}{\\bord%d}%s{\\3a&H%02X&}{\\shad%d}%s{\\4a&H%02X&}{\\fsp%d}{\\blur%d}",
+        _font, size, bold and 1 or 0, italic and 1 or 0, format_color(color, "1"),
+        alpha, border, format_color(bordercolor, "3"), borderalpha, shad,
+        format_color(shadcolor, "4"), shadalpha, spacing, blur
+    )
 end
+
+local function set_clock_locale()
+    if user_opts.locale ~= "" then
+        local result = os.setlocale(user_opts.locale)
+
+        if not result and not error_flags.clk_locale_err then
+            mp.msg.error("Failed to set locale: " .. user_opts.locale)
+            error_flags.clk_locale_err = true
+        end
+    end
+end
+set_clock_locale()
 
 local function set_clock_style()
-    local clock_font = nil
-    local clock_bold = user_opts.clock_fontbold and 1 or 0
-    local clock_italic = user_opts.clock_fontitalic and 1 or 0
-
-    if user_opts.clockfont == "default" then
-        clock_font = mp.get_property("options/font")
-    else
-        clock_font = user_opts.clock_font
-    end
-
-    return string.format(
-        "%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
-        string.format("{\\fn%s}", clock_font),
-        string.format("{\\fs%d}", user_opts.clock_fontsize),
-        string.format("{\\b%d}", clock_bold),
-        string.format("{\\i%d}", clock_italic),
-        format_color(user_opts.clock_fontcolor, "1"),
-        string.format("{\\alpha&H%X&}", current_alpha.clockfont),
-        string.format("{\\bord%d}", user_opts.clock_bordersize),
-        format_color(user_opts.clock_bordercolor, "3"),
-        string.format("{\\3a&H%X&}", current_alpha.clockborder),
-        string.format("{\\shad%d}", user_opts.clock_shadowdist),
-        format_color(user_opts.clock_shadowcolor, "4"),
-        string.format("{\\4a&H%X&}", current_alpha.clockshadow),
-        string.format("{\\fsp%d}", user_opts.clock_textspacing),
-        string.format("{\\blur%d}", user_opts.clock_edgeblur)
+    clock_style = build_style(
+        user_opts.clock_font, user_opts.clock_fontsize, user_opts.clock_fontbold,
+        user_opts.clock_fontitalic, user_opts.clock_fontcolor, current_alpha.clockfont,
+        user_opts.clock_bordersize, user_opts.clock_bordercolor, current_alpha.clockborder,
+        user_opts.clock_shadowdist, user_opts.clock_shadowcolor, current_alpha.clockshadow,
+        user_opts.clock_textspacing, user_opts.clock_edgeblur
     )
-end
-
-local function set_date_style()
-    local date_font = nil
-    local date_bold = user_opts.date_fontbold and 1 or 0
-    local date_italic = user_opts.date_fontitalic and 1 or 0
-
-    if user_opts.datefont == "default" then
-        date_font = mp.get_property("options/font")
-    else
-        date_font = user_opts.date_font
-    end
-
-    return string.format(
-        "%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
-        string.format("{\\fn%s}", date_font),
-        string.format("{\\fs%d}", user_opts.date_fontsize),
-        string.format("{\\b%d}", date_bold),
-        string.format("{\\i%d}", date_italic),
-        format_color(user_opts.date_fontcolor, "1"),
-        string.format("{\\alpha%d}", current_alpha.datefont),
-        string.format("{\\bord%d}", user_opts.date_bordersize),
-        format_color(user_opts.date_bordercolor, "3"),
-        string.format("{\\3a%d}", current_alpha.dateborder),
-        string.format("{\\shad%d}", user_opts.date_shadowdist),
-        format_color(user_opts.date_shadowcolor, "4"),
-        string.format("{\\4a%d}", current_alpha.dateshadow),
-        string.format("{\\fsp%d}", user_opts.date_textspacing),
-        string.format("{\\blur%d}", user_opts.date_edgeblur)
-    )
-end
-
-local function set_clock_format()
-    local time = nil
-    local systime = os.date("%I:%M")
-
-    if user_opts.clock_advformat == "" then
-        if user_opts.clock_format == "24" then
-            time = os.date("%H:%M")
-        elseif user_opts.clock_format == "12" then
-            time = os.date("%I:%M")
-        elseif user_opts.clock_format == "24s" then
-            time = os.date("%H:%M:%S")
-        elseif user_opts.clock_format == "12s" then
-            time = os.date("%I:%M:%S")
-        elseif user_opts.clock_format == "12m" then
-            time = os.date("%I:%M%p")
-        elseif user_opts.clock_format == "full" then
-            time = os.date("%X")
-        elseif user_opts.clock_format == "12j" then
-            if systime:match("^12") then
-                time = systime:gsub("^(..)", "0")
-            elseif systime:match("^0") then
-                time = systime:gsub("^(0)", "")
-            else
-                time = systime
-            end
-        elseif user_opts.clock_format == "12jb" then
-            if systime:match("^12") then
-                time = systime:gsub("^(..)", "　0")
-            elseif systime:match("^0") then
-                time = systime:gsub("^(0)", "　")
-            else
-                time = systime
-            end
-        end
-    else
-        time = os.date(user_opts.clock_advformat)
-    end
-
-    return time
-end
-
-local function set_date_format()
-    local date = nil
-
-    if user_opts.date_advformat == "" then
-        if user_opts.date_format == "dmy" then
-            date = os.date("%d/%m/%Y")
-        elseif user_opts.date_format == "iso" then
-            date = os.date("%Y/%m/%d")
-        elseif user_opts.date_format == "usa" then
-            date = os.date("%m/%d/%Y")
-        elseif user_opts.date_format == "smp1" then
-            date = os.date("%d/%m")
-        elseif user_opts.date_format == "smp2" then
-            date = os.date("%m/%d")
-        elseif user_opts.date_format == "full" then
-            date = os.date("%x")
-        end
-    else
-        date = os.date(user_opts.date_advformat)
-    end
-
-    return date
-end
-
-local function clock()
-    local clock_data = set_clock_style()
-    local clock_format = set_clock_format()
-    local date_data = nil
-    local date_format = set_date_format()
-
-    osc_clock.data = string.format("{\\an7}%s%s%s", clock_data, clock_pos, clock_format)
-    osc_clock:update()
 
     if user_opts.date_enable then
         if user_opts.date_useclockopt then
-            date_data = clock_data
+            date_style = clock_style
         else
-            date_data = set_date_style()
-        end
-
-        osc_date.data = string.format("{\\an7}%s%s%s", date_data, date_pos, date_format)
-        osc_date:update()
-    end
-end
-
-local function hide_clock()
-    osc_clock:remove()
-    if osc_date then
-        osc_date:remove()
-    end
-
-    if timer then
-        timer:stop()
-    end
-    if hide_timer then
-        hide_timer:kill()
-        hide_timer = nil
-    end
-    is_shown = false
-end
-
-local function show_clock_temp()
-    if not is_permanent then
-        if is_shown and not is_permanent then
-            if hide_timer then
-                hide_timer:kill()
-            end
-            hide_timer = mp.add_timeout(user_opts.duration, hide_clock)
-            return
-        end
-
-        clock()
-        timer = mp.add_periodic_timer(1, clock)
-        is_shown = true
-        hide_timer = mp.add_timeout(user_opts.duration, hide_clock)
-    end
-end
-
-local function toggle_clock_permanent()
-    if not hide_timer then
-        if is_shown and is_permanent then
-            osc_clock:remove()
-            if osc_date then
-                osc_date:remove()
-            end
-
-            if timer then
-                timer:stop()
-            end
-            is_shown = false
-            is_permanent = false
-        else
-            clock()
-
-            timer = mp.add_periodic_timer(1, clock)
-            is_shown = true
-            is_permanent = true
+            date_style = build_style(
+                user_opts.date_font, user_opts.date_fontsize, user_opts.date_fontbold,
+                user_opts.date_fontitalic, user_opts.date_fontcolor, current_alpha.datefont,
+                user_opts.date_bordersize, user_opts.date_bordercolor, current_alpha.dateborder,
+                user_opts.date_shadowdist, user_opts.date_shadowcolor, current_alpha.dateshadow,
+                user_opts.date_textspacing, user_opts.date_edgeblur
+            )
         end
     end
 end
+set_clock_style()
 
-local function show_clock_permanent()
-    toggle_clock_permanent()
-
-    if show_msg then
-        if is_permanent then
-            mp.osd_message("Clock enabled")
-        else
-            mp.osd_message("Clock disabled")
-        end
+local function set_clock_format()
+    if user_opts.clock_advformat ~= "" then
+        return os.date(user_opts.clock_advformat)
     end
+
+    local formats = {
+        ["24"] = "%H:%M", ["12"]  = "%I:%M",
+        ["24s"] = "%H:%M:%S", ["12s"] = "%I:%M:%S",
+        ["12m"] = "%I:%M%p", ["full"] = "%X"
+    }
+    local fmt = formats[user_opts.clock_format]
+    if fmt then
+        return os.date(fmt)
+    end
+
+    if user_opts.clock_format == "12j" or user_opts.clock_format == "12jb" then
+        local systime = os.date("%I:%M")
+        local pad = (user_opts.clock_format == "12jb") and "　" or ""
+
+        return (systime:gsub("^12", pad .. "0"):gsub("^0", pad))
+    else
+        if not error_flags.clk_format_err then
+            mp.msg.error("Incorrect clock format, using the default setting!")
+            error_flags.clk_format_err = true
+        end
+
+        return os.date(formats["24"])
+    end
+end
+
+local function set_date_format()
+    if user_opts.date_advformat ~= "" then
+        return os.date(user_opts.date_advformat)
+    end
+
+    local formats = {
+        ["dmy"] = "%d/%m/%Y", ["iso"] = "%Y/%m/%d",
+        ["usa"] = "%m/%d/%Y", ["smp1"] = "%d/%m",
+        ["smp2"] = "%m/%d", ["full"] = "%x"
+    }
+    local fmt = formats[user_opts.date_format]
+    if fmt then
+        return os.date(fmt)
+    else
+        if not error_flags.dte_format_err then
+            mp.msg.error("Incorrect date format, using the default setting!")
+            error_flags.dte_format_err = true
+        end
+
+        return os.date(formats["iso"])
+    end
+end
+
+local function get_update_interval()
+    return (user_opts.clock_format:match("s") or user_opts.clock_advformat:match("%%S")) and 1 or 5
 end
 
 local function check_audiolang()
@@ -324,10 +225,88 @@ local function check_audiolang()
     return false
 end
 
+local function clock()
+    osc_clock.data = string.format("{\\an7\\osduntimed}%s%s%s", clock_style, clock_pos, set_clock_format())
+    osc_clock:update()
+
+    if user_opts.date_enable then
+        osc_date.data = string.format("{\\an7\\osduntimed}%s%s%s", date_style, date_pos, set_date_format())
+        osc_date:update()
+    end
+end
+
+local function start_clock()
+    clock()
+    if timer then
+        timer:stop()
+    end
+
+    timer = mp.add_periodic_timer(get_update_interval(), clock)
+    is_shown = true
+end
+
+local function hide_clock()
+    osc_clock:remove()
+    if osc_date then
+        osc_date:remove()
+    end
+
+    if timer then
+        timer:stop()
+    end
+    if hide_timer then
+        hide_timer:kill()
+        hide_timer = nil
+    end
+    is_shown = false
+end
+
+local function show_clock_temp()
+    if is_permanent then
+        return
+    end
+
+    if is_shown then
+        if hide_timer then
+            hide_timer:kill()
+        end
+
+        hide_timer = mp.add_timeout(user_opts.duration, hide_clock)
+        return
+    end
+
+    start_clock()
+    hide_timer = mp.add_timeout(user_opts.duration, hide_clock)
+end
+
+local function show_clock_permanent(supress_mgs)
+    if hide_timer then
+        hide_timer:kill()
+        hide_timer = nil
+    end
+
+    if is_shown and is_permanent then
+        hide_clock()
+        is_permanent = false
+
+        if not supress_mgs and show_msg then
+            mp.osd_message("Clock disabled")
+        end
+    else
+        start_clock()
+        is_permanent = true
+
+        if not supress_mgs and show_msg then
+            mp.osd_message("Clock enabled")
+        end
+    end
+end
+
 local function show_clock_bylang()
-    if check_audiolang() then
-        if not is_shown then
-            toggle_clock_permanent()
+    if check_audiolang() and not is_shown then
+        show_clock_permanent(true)
+        if show_msg then
+            mp.osd_message("Clock automatically enabled (language)")
         end
     end
 end
@@ -354,16 +333,17 @@ local function update_alpha()
             end
         end
 
+        set_clock_style()
         clock()
     end
 end
 
 if user_opts.autoenable == "yes" then
-    toggle_clock_permanent()
+    show_clock_permanent(true)
 elseif user_opts.autoenable == "fsonly" then
     mp.observe_property("fullscreen", "bool", function(name, is_fullscreen)
         if is_fullscreen then
-            toggle_clock_permanent()
+            show_clock_permanent(true)
 
             if show_msg then
                 mp.osd_message("Clock automatically enabled (fullscreen)")
@@ -376,10 +356,6 @@ elseif user_opts.autoenable == "bylang" then
     mp.register_event("file-loaded", function()
         mp.add_timeout(0.1, show_clock_bylang)
     end)
-
-    if show_msg then
-        mp.osd_message("Clock automatically enabled (language)")
-    end
 end
 
 mp.add_key_binding(user_opts.tempkey, "show_clock_temp", show_clock_temp)
@@ -391,3 +367,5 @@ mp.msg.verbose(
     "Key bindings: \"%s\" for temporary clock, \"%s\" for permanent toggle, \"%s\" for fading the clock",
     user_opts.tempkey, user_opts.permakey, user_opts.fadekey
 )
+
+mp.register_event("shutdown", hide_clock)

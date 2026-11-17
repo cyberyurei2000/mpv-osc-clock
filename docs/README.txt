@@ -2,7 +2,7 @@
     mpv-osc-clock
     Copyright (c) cyberyurei2000 2024-2026
 
-    README                         ver 4.02
+    README                         ver NEXT
 -----------------------------------------------
 
 ■ Table of content
@@ -313,9 +313,12 @@
 
 
 ■ 6. Changelog
+    2026/XX/XX ver NEXT
+        TODO
+
     2026/08/26 ver 4.02
         Bugfixes:
-            ・Fix a bug in Windows which causes the clock to display as "nil" at specific times with "clock_format" set to "12j" or "12jb".
+            ・Fix a bug in Windows which causes the clock to display as "nil" at specific times with "clock_format" set to "12j" or "12jb"
 
     2026/07/06 ver 4.01
         Bugfixes:
